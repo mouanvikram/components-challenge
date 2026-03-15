@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alignment</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .bar {
+
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bar-1 {
+            transition-delay: 0ms;
+        }
+
+        .bar-2 {
+            transition-delay: 33ms;
+        }
+
+        .bar-3 {
+            transition-delay: 66ms;
+        }
+
+
+        #active {
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w-full h-screen bg-[#F1F1F1] flex items-center justify-center">
+        <div class="alignment  px-3 py-2 rounded flex gap-5 bg-white  shadow relative">
+            <div id="active" class="left flex flex-col gap-[4px] absolute ">
+                <div class="bar bar-1 w-4 h-[3px]  bg-black   rounded"></div>
+
+                <div class="bar bar-2 w-4 h-[3px]  bg-black  rounded"></div>
+
+                <div class="bar bar-3 w-2 h-[3px]  bg-black   rounded"></div>
+            </div>
+            <div class="align-option flex flex-col gap-[4px]  ">
+                <div class="w-4 h-[3px]  bg-gray-300  rounded"></div>
+
+                <div class="w-4 h-[3px]  bg-gray-300  rounded"></div>
+
+                <div class="w-2 h-[3px]  bg-gray-300  rounded"></div>
+            </div>
+            <div class="align-option flex flex-col gap-[4px]  items-center ">
+                <div class="w-4 h-[3px]  bg-gray-300  rounded"></div>
+
+                <div class="w-4 h-[3px]  bg-gray-300  rounded"></div>
+
+                <div class="w-2 h-[3px]  bg-gray-300  rounded"></div>
+            </div>
+            <div class="align-option flex flex-col gap-[4px]  items-end">
+                <div class="w-4 h-[3px]  bg-gray-300  rounded"></div>
+
+                <div class="w-4 h-[3px]  bg-gray-300  rounded"></div>
+
+                <div class="w-2 h-[3px]  bg-gray-300  rounded"></div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        const indicator = document.getElementById('active');
+        const bars = document.querySelectorAll('.bar');
+        const options = document.querySelectorAll('.align-option');
+
+        const offsetStart = 12;
+
+        options.forEach((option, index) => {
+            option.addEventListener('click', () => {
+                const targetX = option.offsetLeft - offsetStart;
+
+                bars.forEach(bar => {
+                    bar.style.transform = `translateX(${targetX}px)`;
+                });
+               
+                setTimeout(() => {
+                    updateAlignment(index);
+                }, 100);
+
+            });
+        });
+
+        function updateAlignment(index) {
+  if (index === 0) {
+    indicator.classList.add('items-start');
+    indicator.classList.remove('items-center','items-end');
+  } 
+  else if (index === 1) {
+    indicator.classList.add('items-center');
+    indicator.classList.remove('items-start','items-end');
+  } 
+  else {
+    indicator.classList.add('items-end');
+    indicator.classList.remove('items-start','items-center');
+  }
+}
+    </script>
+</body>
+
+</html>
