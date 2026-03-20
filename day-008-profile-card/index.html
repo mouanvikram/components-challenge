@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .chips {
+            background-color: #f3f4f6;
+            color: #111827;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .chips:nth-child(1) {
+            background-color: #000;
+            color: #fff;
+            border-color: #c7d2fe;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="w-full h-screen flex items-center justify-center">
+        <div
+            class="max-w-[380px] min-h-[300px] border rounded-[8px] border-[#e5e7eb] shadow-[0px_2px_2px_rgba(0,0,0,0.1)]">
+            <div
+                class="absolute top-0 left-0 w-full h-[120px] rounded-t-[8px] overflow-hidden pointer-events-none bg-linear-[30deg, #efefef 0px, #efefef 16px, transparent 16px, transparent 32px]"
+                >
+            </div>
+            <div class="flex items-end justify-between px-5 py-5 mt-5">
+                <div class="w-[80px] h-[80px] rounded-full bg-gray-300">
+                    <img class="w-[80px] h-[80px] rounded-full border border-[#e5e7eb]" src="profile_img.png"
+                        alt="Profile Picture">
+                </div>
+                <div class="ml-4 flex gap-4 ">
+                    <div class="bg-gray-50 text-black px-4 py-2 rounded-md border border-[#e5e7eb]">Message</div>
+                    <div class="bg-black text-white px-4 py-2 rounded-md">Follow</div>
+                </div>
+            </div>
+            <div class="px-5 py-2">
+                <div class="text-lg font-semibold text-gray-900">John Doe</div>
+                <div class="text-sm text-gray-500">@johndoe</div>
+            </div>
+            <div class="px-5 py-2">
+                <div class="text-sm text-gray-500">Full-stack engineer & UI enthusiast. Building thoughtful products
+                    with React, Node.js & a lot of coffee.</div>
+            </div>
+            <div class="px-5 py-2 mb-4">
+                <div class="flex flex-wrap gap-2">
+                    <div class="chips">UI Designer</div>
+                    <div class="chips">React</div>
+                    <div class="chips">TypeScript</div>
+                    <div class="chips">Open Source</div>
+                </div>
+            </div>
+            <div class="w-full border border-[#e5e7eb] mb-2">
+            </div>
+            <div class="px-5 py-2 flex gap-5 mb-4">
+
+                <div class="">
+                    <div class="text-xl font-bold">142</div>
+                    <div class="text-sm text-gray-500">Posts</div>
+                </div>
+
+                <div class="">
+                    <div class="text-xl font-bold">8.4k</div>
+                    <div class="text-sm text-gray-500">Followers</div>
+                </div>
+
+                <div class="">
+                    <div class="text-xl font-bold">319</div>
+                    <div class="text-sm text-gray-500">Following</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
