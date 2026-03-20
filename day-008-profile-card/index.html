@@ -29,12 +29,22 @@
 
     <div class="w-full h-screen flex items-center justify-center">
         <div
-            class="max-w-[380px] min-h-[300px] border rounded-[8px] border-[#e5e7eb] shadow-[0px_2px_2px_rgba(0,0,0,0.1)]">
-            <div
-                class="absolute top-0 left-0 w-full h-[120px] rounded-t-[8px] overflow-hidden pointer-events-none bg-linear-[30deg, #efefef 0px, #efefef 16px, transparent 16px, transparent 32px]"
-                >
+            class="max-w-[380px] min-h-[300px] border rounded-[8px] border-[#e5e7eb] shadow-[0px_2px_2px_rgba(0,0,0,0.1)] overflow-hidden">
+            
+            <div class="relative flex items-end justify-between px-5 py-5 mt-5">
+                <div
+                class="absolute -top-16 left-0 w-full h-[120px] rounded-t-[8px] overflow-hidden pointer-events-none -z-10"
+                style="
+                    background: repeating-linear-gradient(
+                        -60deg,
+                        #efefef 4px,
+                        #efefef 6px,
+                        transparent 4px,
+                        transparent 15px
+                    );
+                "
+            >
             </div>
-            <div class="flex items-end justify-between px-5 py-5 mt-5">
                 <div class="w-[80px] h-[80px] rounded-full bg-gray-300">
                     <img class="w-[80px] h-[80px] rounded-full border border-[#e5e7eb]" src="profile_img.png"
                         alt="Profile Picture">
