@@ -22,6 +22,15 @@
             color: #fff;
             border-color: #c7d2fe;
         }
+        .lines-bg{
+            background: repeating-linear-gradient(
+                        -60deg,
+                        #efefef 4px,
+                        #efefef 6px,
+                        transparent 4px,
+                        transparent 15px
+                    );
+        }
     </style>
 </head>
 
@@ -33,16 +42,8 @@
             
             <div class="relative flex items-end justify-between px-5 py-5 mt-5">
                 <div
-                class="absolute -top-16 left-0 w-full h-[120px] rounded-t-[8px] overflow-hidden pointer-events-none -z-10"
-                style="
-                    background: repeating-linear-gradient(
-                        -60deg,
-                        #efefef 4px,
-                        #efefef 6px,
-                        transparent 4px,
-                        transparent 15px
-                    );
-                "
+                class="lines-bg absolute -top-16 left-0 w-full h-[120px] rounded-t-[8px] overflow-hidden pointer-events-none -z-10"
+               
             >
             </div>
                 <div class="w-[80px] h-[80px] rounded-full bg-gray-300">
