@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Dropdown</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .bell-shake {
+            animation: shake 0.8s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            15% {
+                transform: rotate(16deg);
+            }
+
+            30% {
+                transform: rotate(-14deg);
+            }
+
+            45% {
+                transform: rotate(10deg);
+            }
+
+            60% {
+                transform: rotate(-8deg);
+            }
+
+            75% {
+                transform: rotate(4deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#f4f4f5]">
+    <div class="w-full h-screen flex items-start justify-center mt-20">
+
+        <div class="relative">
+            <div class="border border-gray-300 rounded-lg w-[40px] h-[40px] flex items-center justify-center relative bg-white cursor-pointer"
+                id="bellBtn">
+                <span id="bell-btn" class="bell-shake">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#09090b" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                </span>
+                <span
+                    class="absolute -top-[5px] -right-[5px] bg-red-400   text-[12px] w-[18px] h-[18px] flex items-center justify-center  rounded-full "
+                    id="badge">4</span>
+            </div>
+            <div class="mt-2"></div>
+            <div id="dropdown"
+                class="absolute right-0 border  bg-white border-gray-300 rounded-lg  min-w-[320px] flex flex-col shadow-[0px_2px_2px_0px_rgba(0,0,0,0.1)] ">
+                <div class="flex items-center justify-between px-6 py-3 border-b border-gray-200">
+                    <div class="text-[16px] font-bold ">Notifications</div>
+                    <div class="text-gray-500 text-sm">Mark All as Read</div>
+                </div>
+                <div class="px-6 py-4 gap-4 border-b border-gray-200  flex ">
+                    <div class="w-[40px] h-[40px] rounded-full bg-gray-300 border border-gray-300">
+                        <img class="rounded-full " src="profile_img1.png" alt="">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <div class="text-sm font-semibold">Kaushik shared a file</div>
+                        <div class="text-xs text-gray-500">brand-assets-v3.zip was shared with...</div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 gap-4 border-b border-gray-200  flex ">
+                    <div class="w-[40px] h-[40px] rounded-full bg-gray-300 border border-gray-300">
+                        <img class="rounded-full " src="profile_img2.png" alt="">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <div class="text-sm font-semibold">
+                            Mohan left a comment</div>
+                        <div class="text-xs text-gray-500 max-w-full overflow-hidden text-ellipsis h-[15px]">"Looks
+                            great! Can we adjust the spacing?"
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 gap-4 border-b border-gray-200  flex ">
+                    <div class="w-[40px] h-[40px] rounded-full bg-gray-300"></div>
+                    <div class="flex flex-col gap-1">
+                        <div class="text-sm font-semibold">Aryan Mentioned You</div>
+                        <div class="text-xs text-gray-500">Tagged you in the design review thre</div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 gap-4 border-b border-gray-200  flex ">
+                    <div class="w-[40px] h-[40px] rounded-full bg-gray-300"></div>
+                    <div class="flex flex-col gap-1">
+                        <div class="text-sm font-semibold">Deployment successful</div>
+                        <div class="text-xs text-gray-500">v2.4.1 is now live on production</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const dropdown = document.getElementById('dropdown');
+    const bellBtn = document.getElementById('bellBtn');
+
+    bellBtn.addEventListener('click', () => {
+
+        if (dropdown.classList.contains('hidden')) {
+            dropdown.classList.remove('hidden');
+            setTimeout(() => {
+                dropdown.style.transform = 'scale(1)';
+            }, 50);
+
+        } else {
+            dropdown.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                dropdown.classList.add('hidden');
+            }, 50);
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!bellBtn.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
+
+</html>
