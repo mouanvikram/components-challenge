@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twisting Text</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<style>
+    .char-cell {
+        overflow: hidden;
+        height: 1.15em;
+        line-height: 1.15em;
+        position: relative;
+        display: inline-block;
+    }
+
+    .char-top {
+        display: block;
+        transform: translateY(0%);
+        transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+        white-space: pre;
+    }
+
+    .char-bottom {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        white-space: pre;
+        transform: translateY(0%);
+        transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    .flip-line:hover .char-cell .char-top {
+        transform: translateY(-100%);
+    }
+
+    .flip-line:hover .char-cell .char-bottom {
+        transform: translateY(-100%);
+    }
+</style>
+
+<body>
+    <div class="h-30px w-full h-screen flex items-center justify-center">
+        <div class="section">
+            
+            <div class="flip-line text-6xl font-bold" id="hoverLine"></div>
+            <p style="font-size:12px;color:#a1a1aa;margin:0;">Move mouse over the text</p>
+        </div>
+    </div>
+
+    <script>
+
+        const text = 'Hover over me';
+        const line = document.getElementById('hoverLine');
+
+        text.split('').forEach((char, i) => {
+            const delay = i * 40;
+            const cell = document.createElement('span');
+            cell.className = 'char-cell';
+
+            const top = document.createElement('span');
+            top.className = 'char-top';
+            top.style.transitionDelay = `${delay}ms`;
+            top.textContent = char === ' ' ? '\u00A0' : char;
+
+            const bot = document.createElement('span');
+            bot.className = 'char-bottom';
+            bot.style.transitionDelay = `${delay}ms`;
+            bot.textContent = char === ' ' ? '\u00A0' : char;
+
+            cell.appendChild(top);
+            cell.appendChild(bot);
+            line.appendChild(cell);
+        });
+
+    </script>
+</body>
+
+</html>
