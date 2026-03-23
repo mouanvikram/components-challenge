@@ -66,13 +66,13 @@
             top.style.transitionDelay = `${delay}ms`;
             top.textContent = char === ' ' ? '\u00A0' : char;
 
-            const bot = document.createElement('span');
-            bot.className = 'char-bottom';
-            bot.style.transitionDelay = `${delay}ms`;
-            bot.textContent = char === ' ' ? '\u00A0' : char;
+            const bottom = document.createElement('span');
+            bottom.className = 'char-bottom';
+            bottom.style.transitionDelay = `${delay}ms`;
+            bottom.textContent = char === ' ' ? '\u00A0' : char;
 
             cell.appendChild(top);
-            cell.appendChild(bot);
+            cell.appendChild(bottom);
             line.appendChild(cell);
         });
 
