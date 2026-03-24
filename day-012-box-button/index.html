@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Button</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        #boxes span,
+        #boxes2 span,
+        #boxes3 span {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgb(0, 0, 0);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #boxButton:hover,
+        #boxButton2:hover,
+        #boxButton3:hover {
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        #boxButton:hover #boxes span   { opacity: 1; }
+        #boxButton2:hover #boxes2 span { opacity: 1; }
+        #boxButton3:hover #boxes3 span { opacity: 1; }
+    </style>
+
+</head>
+
+<body>
+    <div class="w-full h-screen flex items-center justify-center gap-3 flex-col">
+        <!-- //button 1 -->
+        <div class="w-[120px] h-[50px] flex items-center justify-center rounded border border-gray-300 bg-white leading-none overflow-hidden relative"
+            id="boxButton">
+            <span class="relative z-10">Button</span>
+            <span class="absolute w-[120px] h-[50px] rounded" id="boxes"></span>
+        </div>
+        <!-- <div class="w-[120px] h-[50px] flex items-center justify-center rounded border border-gray-300 bg-white leading-none overflow-hidden relative"
+            id="boxButton2">
+            <span class="relative z-10">Button</span>
+            <span class="absolute w-[120px] h-[50px] rounded" id="boxes2"></span>
+        </div>
+        <div class="w-[120px] h-[50px] flex items-center justify-center rounded border border-gray-300 bg-white leading-none overflow-hidden relative"
+            id="boxButton3">
+            <span class="relative z-10">Button</span>
+            <span class="absolute w-[120px] h-[50px] rounded" id="boxes3"></span>
+        </div> -->
+    </div>
+    <script>
+        const boxes = document.getElementById('boxes');
+
+        // from center to outside
+        const cols = 24, rows = 10;
+        const centerX = (cols) / 2; // 5.5
+        const centerY = (rows) / 2;
+        for (let j = 0; j < 10; j++) {
+            for (let i = 0; i < 24; i++) {
+                const box = document.createElement('span');
+                box.style.top = `${j * 5}px`;
+                box.style.left = `${i * 5}px`;
+
+                const dist = Math.sqrt((i - centerX) ** 2 + (j - centerY) ** 2);
+                box.style.transitionDelay = `${dist * 40}ms`;
+               
+
+                boxes.appendChild(box);
+            }
+        }
+
+        // from left to right
+        const boxes2 = document.getElementById('boxes2');
+        for (let j = 0; j < 10; j++) {
+            for (let i = 0; i < 24; i++) {
+                const box = document.createElement('span');
+                box.style.top = `${j * 5}px`;
+                box.style.left = `${i * 5}px`;
+
+                box.style.transitionDelay = `${(i + j) * 10}ms`;
+
+                boxes2.appendChild(box);
+            }
+        }
+
+        // from top to bottom
+        const boxes3 = document.getElementById('boxes3');
+        for (let j = 0; j < 10; j++) {
+            for (let i = 0; i < 24; i++) {
+                const box = document.createElement('span');
+                box.style.top = `${j * 10}px`;
+                box.style.left = `${i * 10}px`;
+
+                box.style.transitionDelay = `${(j) * 20}ms`;
+
+                boxes3.appendChild(box);
+            }
+        }
+    </script>
+</body>
+
+</html>
