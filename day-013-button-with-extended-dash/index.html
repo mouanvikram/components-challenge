@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card with dash lines</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .top,
+        .bottom,.right,.left {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            /* top: -1px; */
+            border-bottom: 1px dashed #fdfdfd;
+            mask-image: linear-gradient(to right,
+                    transparent,
+                    black 20%,
+                    black 80%);
+        }
+
+        .left,
+        .right {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            border-left: 1px dashed #fdfdfd;
+            mask-image: linear-gradient(to bottom,
+                    transparent,
+                    black 20%,
+                    black 80%);
+        }
+        .top {
+            top: -2px;
+        }
+
+        .bottom {
+            bottom: -2px;
+        }
+        .left {
+            left: -2px;
+        }
+
+        .right {
+            right: -2px;
+
+        }
+
+
+        .top-left,
+        .bottom-left {
+            left: -25%;
+        }
+
+        .top-right,
+        .bottom-right {
+            left: 25%;
+            transform: rotateY(180deg);
+        }
+
+        .left-top,
+        .right-top {
+            top: -25%;
+        }
+
+        .left-bottom,
+        .right-bottom {
+            top: 25%;
+            transform: rotateX(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w-full h-screen flex items-center justify-center bg-[#15161A]">
+        <div
+            class="w-[320px] h-[340px]  rounded-md  border border-gray-300 bg-white shadow-[0_1px_2px_0px_rgba(0,0,0,0.1)] relative p-4">
+            <h1 class="font-bold text-gray-600 ">Hositing over the edge</h1>
+            <p class="mt-1 text-gray-500">
+                With our edge network, we host your
+                website  by going into each city by ourselves.
+            </p>
+            <span class="top top-left"></span><span class="top top-right"></span>
+            <span class="bottom bottom-left"></span><span class="bottom bottom-right"></span>
+            <span class="left left-top"></span><span class="left left-bottom"></span>
+            <span class="right right-top"></span><span class="right right-bottom"></span>
+        </div>
+    </div>
+</body>
+
+</html>
