@@ -1,19 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hover Focus animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+
+
+        #lt,
+        #rt,
+        #bl,
+        #br {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            transition: all 0.3s ease;
+        }
+
+        #lt {
+            border-top: 3px solid #6b6b6b;
+            border-left: 3px solid #6b6b6b;
+            top: 0px;
+            left: 0px; 
+        }
+
+        #rt {
+            border-top: 3px solid #6b6b6b;
+            border-right: 3px solid #6b6b6b;
+            top: 0px;
+            right: 0px;
+        }
+
+        #bl {
+            border-bottom: 3px solid #6b6b6b;
+            border-left: 3px solid #6b6b6b;
+            bottom: 0px;
+            left: 0px;
+        }
+
+        #br {
+            border-bottom: 3px solid #6b6b6b;
+            border-right: 3px solid #6b6b6b;
+            bottom: 0px;
+            right: 0px;
+        }
+        /* *{
+            border:1px solid red;
+        } */
+    </style>
 </head>
+
 <body>
-    <div class="w-full h-screen flex items-center justify-center bg-[#15161A]">
-        <div class="w-[320px] h-[340px] rounded-md border border-gray-300 bg-white shadow-[0_1px_2px_0px_rgba(0,0,0,0.1)] relative p-4">
-            <h1 class="font-bold text-gray-600 ">Hositing over the edge</h1>
-            <p class="mt-1 text-gray-500">
-                With our edge network, we host your
-                website  by going into each city by ourselves.
-            </p>
+    <div class="w-full h-screen flex flex-col items-center justify-center bg-[#fefefe]">
+        <div class="w-[500px] h-[350px] border border-gray-300 rounded flex flex-col p-5 gap-5">
+            <div id= "parent" class="w-full h-[320px] p-3 flex flex-col gap-3 relative  rounded">
+                <div id="lt" class="">
+                </div>
+                <div id="rt" class="">
+                </div>
+                <div id="bl" class="">
+                </div>
+                <div id="br" class="">
+                </div>
+                <div id="sub-1" class="w-full h-[50%] rounded bg-gray-200"></div>
+                <div class="w-full h-[50%] flex flex-row gap-3 ">
+                    <div id="sub-2" class="w-[50%] h-full bg-gray-200 rounded ">
+
+                    </div>
+                    <div id="sub-3" class="w-[50%] h-full bg-gray-200 rounded ">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="w-full h-[20px] text-center text-gray-500 text-xs">
+                hover over skeleton to see the effect
+            </div>
         </div>
+
     </div>
 </body>
+<script>
+    const parent = document.getElementById('parent');
+    const sub1 = document.getElementById('sub-1');
+    const sub2 = document.getElementById('sub-2');
+    const sub3 = document.getElementById('sub-3');
+
+    const lt = document.getElementById('lt');
+    const rt = document.getElementById('rt');
+    const bl = document.getElementById('bl');
+    const br = document.getElementById('br');
+
+
+
+    function resetCorner() {
+        lt.style.top = '0px';
+        lt.style.left = '0px';
+        lt.style.bottom = "";
+        lt.style.right = "";
+
+        rt.style.top = '0px';
+        rt.style.right = '0px';
+        rt.style.bottom = "";
+        rt.style.left = "";
+
+        bl.style.bottom = '0px';
+        bl.style.left = '0px';
+        bl.style.top = "";
+        bl.style.right = "";
+
+        br.style.top = "";
+        br.style.left = "";
+        br.style.bottom = '0px';
+        br.style.right = '0px';
+    }
+
+    function moveCorner(el) {
+        const rect = parent.getBoundingClientRect();
+        const e = el.target.getBoundingClientRect();
+        const top = e.top - rect.top;
+        const left = e.left - rect.left;
+        const right = e.right - rect.left;
+        const bottom = e.bottom - rect.top;
+
+        lt.style.top = `${top}px`;
+        lt.style.left = `${left}px`;
+        lt.style.bottom = "";
+        lt.style.right = "";
+
+        rt.style.top = `${top}px`;
+        rt.style.right = `${rect.width - right}px`;
+        rt.style.bottom = "";
+        rt.style.left = "";
+
+        bl.style.bottom = `${rect.height - bottom}px`;
+        bl.style.left = `${left}px`;
+        bl.style.top = "";
+        bl.style.right = "";
+
+        br.style.bottom = `${rect.height - bottom}px`;
+        br.style.right = `${rect.width - right}px`;
+        br.style.top = "";
+        br.style.left = "";
+
+    }
+    
+    [sub1, sub2, sub3].forEach(sub => {
+        sub.addEventListener('mouseenter',moveCorner);
+
+
+        sub.addEventListener('mouseleave', () => {
+            resetCorner();
+        });
+    });
+   
+</script>
+
 </html>
