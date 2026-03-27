@@ -7,8 +7,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-
-
         #lt,
         #rt,
         #bl,
@@ -23,7 +21,7 @@
             border-top: 3px solid #6b6b6b;
             border-left: 3px solid #6b6b6b;
             top: 0px;
-            left: 0px; 
+            left: 0px;
         }
 
         #rt {
@@ -46,17 +44,21 @@
             bottom: 0px;
             right: 0px;
         }
-        #sub-1:hover,#sub-2:hover,#sub-3:hover {
+
+        #sub-1:hover,
+        #sub-2:hover,
+        #sub-3:hover {
             background-color: oklch(87.2% 0.01 258.338);
             transition: background-color 0.3s ease;
         }
     </style>
+    <title>Hover Focus Animation</title>
 </head>
 
 <body>
     <div class="w-full h-screen flex flex-col items-center justify-center bg-[#fefefe]">
         <div class="w-[500px] h-[350px] border border-gray-300 rounded flex flex-col p-5 gap-5">
-            <div id= "parent" class="w-full h-[320px] p-3 flex flex-col gap-3 relative  rounded">
+            <div id="parent" class="w-full h-[320px] p-3 flex flex-col gap-3 relative  rounded">
                 <div id="lt" class="">
                 </div>
                 <div id="rt" class="">
@@ -147,16 +149,16 @@
         br.style.left = "";
 
     }
-    
+
     [sub1, sub2, sub3].forEach(sub => {
-        sub.addEventListener('mouseenter',moveCorner);
+        sub.addEventListener('mouseenter', moveCorner);
 
 
         sub.addEventListener('mouseleave', () => {
             resetCorner();
         });
     });
-   
+
 </script>
 
 </html>

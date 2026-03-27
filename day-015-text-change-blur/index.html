@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Text Change with blur</title>
+    <style>
+        .text {
+            max-width: 450px;
+            height: 300px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .word {
+            display: inline-block;
+            filter: blur(10px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            margin-right: 10px;
+        }
+
+        .visible {
+            filter: blur(0px);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w-full h-screen flex items-center justify-center">
+        <div id="text" class="text">Change Text</div>
+    </div>
+    <script>
+        const sentences = [
+            "The first rule of design is that everything communicates.",
+            "Simplicity is not the absence of clutter, but the presence of clarity.",
+            "Good typography is invisible. Bad typography is everywhere."
+        ];
+
+        const text = document.getElementById('text');
+        let words = [], timer = null;
+
+        function buildWords(s) {
+            const w = s.split(' ');
+
+            words = w.map(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.textContent = word + ' ';
+                wordSpan.classList.add('word');
+                text.appendChild(wordSpan);
+
+                return wordSpan;
+            });
+
+        }
+        let index = 0;
+        function revealWords() {
+            if (index < words.length) {
+                words[index].classList.add('visible');
+                index++;
+            } else {
+                clearInterval(timer);
+                index = 0;
+            }
+        }
+
+
+        s_index = 0;
+        text.addEventListener('click', () => {
+            text.textContent = '';
+            buildWords(sentences[s_index]);
+            s_index = (s_index + 1) % sentences.length;
+            if(timer){
+                index = 0;
+                clearInterval(timer)
+            }
+            timer = setInterval(revealWords, 350);
+        });
+    </script>
+
+</body>
+
+</html>
