@@ -27,14 +27,32 @@
             animation: rotateBack 0.3s ease forwards;
         }
 
-        .content {
+        /* .content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: all 0.6s ease-in-out;
+            padding: 0;
         }
 
         .content.open {
             max-height: 200px;
+            padding: 10px 0;
+        } */
+
+        .content-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s ease-in;
+            overflow: hidden;
+        }
+
+        .content-wrapper.open {
+            grid-template-rows: 1fr;
+            transition: grid-template-rows 0.35s ease-out;
+        }
+
+        .content-wrapper>.content {
+            min-height: 0;
         }
 
         @keyframes rotateBack {
@@ -84,11 +102,13 @@
 </head>
 
 <body>
-    <div class="w-full h-screen flex items-center justify-center bg-[#19191B] text-[#EDEDED]">
-        <div class="w-96 rounded-2xl flex flex-col">
+    <div class="w-full h-screen py-10  bg-[#19191B] text-gray-400 m-0 pb-30">
+        <div class="w-96 m-auto rounded-2xl flex flex-col">
             <div class="item bg-[#28282B]  hover:bg-[#1F1F21] px-6 py-5 cursor-pointer rounded-t-2xl">
-                <div class="flex gap-3 items-center">
-                    <div class="w-12 size-10 bg-gray-300 rounded"></div>
+                <div class="flex gap-5 items-center">
+                    <div class="w-12 size-10 bg-[#3A3A3C] rounded">
+
+                    </div>
                     <div class="w-full flex flex-col">
                         <div class="flex items-center justify-between">
                             <h2 class="text font-semibold">What is a flashcard?</h2>
@@ -101,13 +121,18 @@
                     </div>
                 </div>
 
-                <p class="content text-gray-300 mt-1">A flashcard learning system presents information in a
-                    question-answer format to improve memory retention. Users review prompts on one side and answers on
-                    the other, often using spaced repetition.</p>
+                <div class="content-wrapper">
+                    <p class="content text-gray-400 mt-1">A flashcard learning system presents information in a
+                        question-answer format to improve memory retention. Users review prompts on one side and answers
+                        on
+                        the other, often using spaced repetition.</p>
+                </div>
             </div>
             <div class="item bg-[#28282B]  hover:bg-[#1F1F21] px-6 py-5 cursor-pointer">
-                <div class="flex gap-3 items-center">
-                    <div class="w-12 size-10 bg-gray-300 rounded"></div>
+                <div class="flex gap-5 items-center">
+                    <div class="w-12 size-10 bg-[#3A3A3C] rounded">
+
+                    </div>
                     <div class="w-full flex flex-col">
                         <div class="flex items-center justify-between">
                             <h2 class="text font-semibold">How to improve learning?</h2>
@@ -120,12 +145,14 @@
                     </div>
                 </div>
 
-                <p class="content text-gray-300 mt-1  ">Spaced repetition schedules reviews at increasing intervals
-                    based on performance. Difficult items appear more frequently.</p>
+                <div class="content-wrapper">
+                    <p class="content text-gray-400 mt-1 ">Spaced repetition schedules reviews at increasing intervals
+                        based on performance. Difficult items appear more frequently.</p>
+                </div>
             </div>
             <div class="item bg-[#28282B]  hover:bg-[#1F1F21] px-6 py-5 cursor-pointer">
-                <div class="flex gap-3 items-center">
-                    <div class="w-12 size-10 bg-gray-300 rounded"></div>
+                <div class="flex gap-5 items-center">
+                    <div class="w-12 size-10 bg-[#3A3A3C] rounded"></div>
                     <div class="w-full flex flex-col">
                         <div class="flex items-center justify-between">
                             <h2 class="text font-semibold">Why use flashcards?</h2>
@@ -138,13 +165,18 @@
                     </div>
                 </div>
 
-                <p class="content text-gray-300 mt-1  ">Flashcards promote active recall, forcing the brain to retrieve
-                    information rather than passively re-read it. This strengthens neural connections and improves
-                    retention.</p>
+                <div class="content-wrapper">
+                    <p class="content text-gray-400 mt-1  ">Flashcards promote active recall, forcing the brain to
+                        retrieve
+                        information rather than passively re-read it. This strengthens neural connections and improves
+                        retention.</p>
+                </div>
             </div>
             <div class="item bg-[#28282B]  hover:bg-[#1F1F21] px-6 py-5 cursor-pointer ">
-                <div class="flex gap-3 items-center">
-                    <div class="w-12 size-10 bg-gray-300 rounded"></div>
+                <div class="flex gap-5 items-center">
+                    <div class="w-12 size-10 bg-[#3A3A3C] rounded">
+
+                    </div>
                     <div class="w-full flex flex-col">
                         <div class="flex items-center justify-between">
                             <h2 class="text font-semibold">Flashcards be used for anything?</h2>
@@ -157,13 +189,18 @@
                     </div>
                 </div>
 
-                <p class="content text-gray-300 mt-1  ">Flashcards are versatile and can be used for various subjects,
-                    including mathematics, science, languages, and history. They work best for definitions, formulas,
-                    and key concepts.</p>
+                <div class="content-wrapper">
+                    <p class="content text-gray-400 mt-1  ">Flashcards are versatile and can be used for various
+                        subjects,
+                        including mathematics, science, languages, and history. They work best for definitions,
+                        formulas,
+                        and key concepts.</p>
+                </div>
             </div>
             <div class="item bg-[#28282B]  hover:bg-[#1F1F21] px-6 py-5 cursor-pointer rounded-b-2xl">
-                <div class="flex gap-3 items-center">
-                    <div class="w-12 size-10 bg-gray-300 rounded"></div>
+                <div class="flex gap-5 items-center">
+                    <div class="w-12 size-10 bg-[#3A3A3C] rounded">
+                    </div>
                     <div class="w-full flex flex-col">
                         <div class="flex items-center justify-between">
                             <h2 class="text font-semibold">How many to review daily?</h2>
@@ -176,12 +213,17 @@
                     </div>
                 </div>
 
-                <p class="content text-gray-300 mt-1 ">The optimal number of flashcards depends on individual capacity
-                    and difficulty level. Beginners may start with 10–20 cards daily, while advanced learners can handle
-                    more.</p>
+                <div class="content-wrapper">
+                    <p class="content text-gray-400 mt-1 ">The optimal number of flashcards depends on individual
+                        capacity
+                        and difficulty level. Beginners may start with 10–20 cards daily, while advanced learners can
+                        handle
+                        more.</p>
+                </div>
             </div>
         </div>
     </div>
+    <div class="mb-50"></div>
 </body>
 <script>
     const items = document.querySelectorAll('.item');
@@ -193,6 +235,7 @@
             const content = item.querySelector('p.content');
             const icon = item.querySelector('svg');
 
+
             let isOpen = item.classList.contains('scale-103');
             resetItems();
             if (isOpen) return;
@@ -201,14 +244,14 @@
             items[index + 1]?.classList.add('rounded-t-2xl');
 
 
-            item.classList.add('mb-4', 'mt-4','scale-103');
+            item.classList.add('mb-4', 'mt-4', 'scale-103');
             item.classList.add('rounded-b-2xl', 'rounded-t-2xl');
-            
+
             desc.classList.toggle('hidden');
             desc.classList.remove('descTranslate');
 
-            content.classList.add('contentTranslate');
-            content.classList.add('open');
+            const wrapper = item.querySelector('.content-wrapper');
+            wrapper.classList.add('open');
 
             icon.classList.remove('rotateSvgBack');
             icon.classList.add('rotateSvg');
@@ -233,10 +276,13 @@
             item.classList.remove('mb-4', 'mt-4', 'rounded-b-2xl', 'rounded-t-2xl', 'scale-103');
             if (index === 0) item.classList.add('rounded-t-2xl');
             if (index === items.length - 1) item.classList.add('rounded-b-2xl');
+
             desc.classList.remove('hidden');
             desc.classList.add('descTranslate');
-            content.classList.remove('contentTranslate');
-            content.classList.remove('open');
+
+            const wrapper = item.querySelector('.content-wrapper');
+            wrapper.classList.remove('open');
+
             icon.classList.remove('rotateSvg');
             icon.classList.add('rotateSvgBack');
         });
