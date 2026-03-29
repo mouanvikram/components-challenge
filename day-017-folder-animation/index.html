@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folder animation</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .card-1, .card-2, .card-3 {
+            box-shadow: 0 0px 2px rgba(0, 0, 0, 0.5);
+        }
+        .card-1 {
+            transform: translateX(50px) translateY(-5px);
+            transition: transform 0.5s ease;
+        }
+
+        .card-2 {
+            transform: translateX(0px) translateY(-15px);
+            transition: transform 0.5s ease;
+        }
+
+        .card-3 {
+            transform: translateX(-50px) translateY(-6px);
+            transition: transform 0.5s ease;
+        }
+
+        .relative:hover .card-1 {
+            transform: translateX(50px) translateY(-65px) rotateZ(10deg);
+        }
+
+        .relative:hover .card-2 {
+            transform: translateX(0px) translateY(-65px);
+        }
+
+        .relative:hover .card-3 {
+            transform: translateX(-50px) translateY(-65px) rotateZ(-10deg);
+        }
+
+        .front {
+            backdrop-filter: blur(10px);
+            clip-path: path('M0 161V61.615C0 50.5693 8.95432 41.615 20 41.615H102.463C106.352 41.615 110.156 40.4813 113.41 38.3527L167.06 3.26227C170.315 1.13367 174.119 0 178.008 0H278C289.046 0 298 8.9543 298 20V41.615V161C298 172.046 289.046 181 278 181H20C8.9543 181 0 172.046 0 161Z');
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w-full h-screen bg-[#19191B] flex items-center justify-center">
+        <div class="relative w-[297px] h-[237px]">
+
+            <!-- BACK -->
+            <div class="absolute inset-0 z-[1]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 297 237" class="w-full h-full">
+                    <path
+                        d="M0 217V34.5729V20C0 8.9543 8.95431 0 20 0H109.551C119.098 0 126.837 7.73941 126.837 17.2865C126.837 26.8335 134.577 34.5729 144.124 34.5729H277C288.046 34.5729 297 43.5272 297 54.5729V217C297 228.046 288.046 237 277 237H20C8.95431 237 0 228.046 0 217Z"
+                        fill="#282828" />
+                </svg>
+            </div>
+
+            <!-- MIDDLE SLOT -->
+            <div class="absolute inset-0 z-[2] flex items-end justify-center">
+                <div class="relative w-[180px] h-[210px]">
+                    <!-- card 3 — back, left -->
+                    <div class="card-3 absolute inset-0 bg-white rounded-xl p-4 origin-bottom"><p class="text-[12px] font-semibold text-black/70 mb-2">Private Data</p>
+                        <div class="w-16 h-2 bg-black/10 rounded mb-3"></div>
+                        <div class="w-full h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-4/5 h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-3/5 h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-4/5 h-2 bg-black/10 rounded"></div>
+                    </div>
+
+                    <!-- card 2 — middle, straight -->
+                    <div class="card-2 absolute inset-0 bg-white rounded-xl p-4 origin-bottom">
+                        <p class="text-[12px] font-semibold text-black/70 mb-2">Analytics</p>
+                        <div class="w-20 h-2 bg-black/10 rounded mb-3"></div>
+                        <div class="w-full h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-3/4 h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-4/5 h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-3/5 h-2 bg-black/10 rounded"></div>
+                    </div>
+
+                    <!-- card 1 — front, right -->
+                    <div class="card-1 absolute inset-0 bg-white rounded-xl p-4 origin-bottom">
+                        <p class="text-[12px] font-semibold text-black/70 mb-2">Research Insights</p>
+                        <div class="w-full h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-4/5 h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-3/5 h-2 bg-black/10 rounded mb-2"></div>
+                        <div class="w-4/5 h-2 bg-black/10 rounded"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FRONT -->
+            <div class="front absolute bottom-0 left-0 w-full z-[3]  rounded-3xl">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 298 181" class="w-full">
+                    <path
+                        d="M0 161V61.615C0 50.5693 8.95432 41.615 20 41.615H102.463C106.352 41.615 110.156 40.4813 113.41 38.3527L167.06 3.26227C170.315 1.13367 174.119 0 178.008 0H278C289.046 0 298 8.9543 298 20V41.615V161C298 172.046 289.046 181 278 181H20C8.9543 181 0 172.046 0 161Z"
+                        fill="rgba(0, 0, 0, 0.2)" />
+                </svg>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
