@@ -30,18 +30,12 @@
             background-color: #efefef;
         }
 
-        .card-1>p,
-        .card-2>p,
-        .card-3>p {
-            filter: blur(2px);
+        .relative{
+            filter: drop-shadow(0 15px 12px  rgba(0,0,0,0.2));
         }
-
-        .relative:hover .card-1>p,
-        .relative:hover .card-2>p,
-        .relative:hover .card-3>p {
-            filter: blur(0px);
+        .back{
+            clip-path: path('M0 217V34.5729V20C0 8.9543 8.95431 0 20 0H109.551C119.098 0 126.837 7.73941 126.837 17.2865C126.837 26.8335 134.577 34.5729 144.124 34.5729H277C288.046 34.5729 297 43.5272 297 54.5729V217C297 228.046 288.046 237 277 237H20C8.95431 237 0 228.046 0 217Z');
         }
-
         .relative:hover .card-1 {
             transform: translateX(50px) translateY(-105px) rotateZ(10deg);
         }
@@ -73,7 +67,7 @@
         <div class="relative w-[297px] h-[237px]">
 
             <!-- BACK -->
-            <div class="absolute inset-0 z-[1]">
+            <div class="back absolute inset-0 z-[1]">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 297 237" class="w-full h-full">
                     <path
                         d="M0 217V34.5729V20C0 8.9543 8.95431 0 20 0H109.551C119.098 0 126.837 7.73941 126.837 17.2865C126.837 26.8335 134.577 34.5729 144.124 34.5729H277C288.046 34.5729 297 43.5272 297 54.5729V217C297 228.046 288.046 237 277 237H20C8.95431 237 0 228.046 0 217Z"

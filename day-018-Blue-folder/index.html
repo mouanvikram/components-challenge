@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Folder</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .front{
+            transform-origin: bottom center;
+            transform: perspective(600px) rotateX(-25deg) translateY(5px);
+            transition: all 0.4s cubic-bezier(0.34, 1.1, 0.64, 1);
+        }
+        
+        .middle{
+            transform: translateX();
+        }
+        .folder:hover .front{
+            transform: perspective(600px) rotateX(-45deg) translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w-full h-screen flex items-center justify-center">
+        <div class="folder relative w-[220px] h-[180px]">
+
+            <!-- front -->
+            <div class="back absolute top-0 left-0 w-[220px] h-[180px] bg-blue-600 rounded-xl "></div>
+            <!-- middle section -->
+            <div class="middle absolute inset-0 flex items-center justify-center">
+                <div class="relative">
+                <div class="card1 w-[150px] h-[150px] bg-white rounded-lg"></div>
+                </div>
+
+            </div>
+            <!-- back   -->
+            <div class="front absolute bottom-0 left-0 w-[220px] h-[170px] bg-blue-500 rounded-xl "></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
