@@ -10,16 +10,18 @@
         .front {
             transform-origin: bottom;
             transform: perspective(600px) rotateX(-30deg) translateY(5px);
-            transition: all 0.4s ease-in-out;
+            transition: all 0.2s ease-in-out;
         }
-
+        .back{
+            box-shadow: 0 10px 10px 5px rgba(0, 0, 0, 0.1);
+        }
         .folder:hover .front {
             transform: perspective(600px) rotateX(-40deg) translateY(5px);
         }
 
         .middle {
             transform: translateY(-8px);
-            transition: all 0.4s ease-in-out;
+            transition: all 0.2s ease-in-out;
         }
 
         .folder:hover .middle {
@@ -28,17 +30,17 @@
 
         .card1 {
             transform: rotateZ(-4deg);
-            transition: all 0.5s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         .card2 {
             transform: rotateZ(0deg);
-            transition: all 0.5s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         .card3 {
             transform: rotateZ(2deg);
-            transition: all 0.5s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
         .folder:hover .card2{
             transform: rotateZ(0deg) translateY(-5px);
@@ -50,7 +52,7 @@
 </head>
 
 <body>
-    <div class="w-full h-screen flex items-center justify-center bg-gray-800">
+    <div class="w-full h-screen flex items-center justify-center bg-[#191919]">
         <div class="folder relative w-[220px] h-[170px]">
 
             <!-- back -->
