@@ -5,39 +5,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bounce Animation </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        .bounce{
+        .bounce {
             width: 140px;
             height: 55px;
             transition: all 0.3s cubic-bezier(0.4, 1.2, 0.165, 1);
         }
-        .expand{
 
+        .expand {
+            width: 270px;
+            height: 238px;
+        }
+        .icons {
+            opacity:0;
+            transform: translateY(10px);
+            transition: all 0.3s ease-in-out;
+        }
+        .icons.show{
+            opacity:1;
+            transform: translateY(0);
+        }
+    
+
+        .c_text {
+            transition: transform 0.15s ease;
         }
 
+        .translate {
+            transform: translateX(calc(-135px + 50% + 20px)) translateY(calc(-119px + 50% + 10px));
+        }
     </style>
 </head>
 
 <body>
-    <div class="w-full h-screen flex items-center justify-center bg-gray-100">
-        <div id="create" class="bounce border border-gray-300 bg-white rounded-lg flex items-center justify-center">
-            Create New
+    <div class="w-full h-screen flex items-center justify-center bg-gray-50">
+        <div id="create"
+            class="bounce border border-gray-300 bg-gray-100 rounded-2xl flex items-center justify-center relative cursor-pointer overflow-hidden ">
+            <div id="c_text" class="c_text absolute text-gray-700">Create New</div>
+            <div id="close-icon" class="hidden absolute top-2 right-3 text-gray-500 bg-gray-200 p-1 rounded-full size-5.5 "><svg 
+                    viewBox="0 0 24 24" class="fill-white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6L18 18M18 6L6 18" stroke="black" stroke-width="2" stroke-linecap="round" class="stroke-gray-500" />
+                </svg></div>
+            <div id="icons" class="icons bg-white w-full h-full absolute top-10 rounded-xl border border-gray-300">
+                <div class="grid grid-cols-3 gap-5 p-2 ">
+                    <div class="hover:bg-gray-100 p-2 rounded-2xl flex flex-col items-center justify-center">
+                        <i class="hgi hgi-stroke hgi-folder-01 text-3xl text-gray-400 "></i>
+                        <span class="text-sm mt-1 text-gray-500">Projects</span>
+                    </div>
+                    <div class="hover:bg-gray-100 p-2 rounded-2xl flex flex-col items-center justify-center"><i class="hgi hgi-stroke hgi-task-edit-01 text-3xl text-gray-400 "></i>
+                    <span class="text-sm mt-1 text-gray-500">Tasks</span>
+                    </div>
+                    <div class="hover:bg-gray-100 p-2 rounded-2xl flex flex-col items-center justify-center"><i class="hgi hgi-stroke hgi-sticky-note-02 text-3xl text-gray-400"></i>
+                    <span class="text-sm mt-1 text-gray-500">Notes</span>
+                    </div>
+                    <div class="hover:bg-gray-100 p-2 rounded-2xl flex flex-col items-center justify-center"><i class="hgi hgi-stroke hgi-medal-02  text-3xl text-gray-400"></i>
+                    <span class="text-sm mt-1 text-gray-500">Goals</span>
+                    </div>
+                    <div class="hover:bg-gray-100 p-2 rounded-2xl flex flex-col items-center justify-center"><i class="hgi hgi-stroke hgi-flag-02  text-3xl text-gray-400"></i>
+                    <span class="text-sm mt-1 text-gray-500">Milestone</span>
+                    </div>
+                    <div class="hover:bg-gray-100 p-2 rounded-2xl flex flex-col items-center justify-center"><i class="hgi hgi-stroke hgi-calendar-01 text-3xl text-gray-400"></i>
+                    <span class="text-sm mt-1 text-gray-500">Reminder</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         const create = document.getElementById('create');
-
+        const c_text = document.getElementById('c_text');
+        const icons = document.getElementById('icons');
+        const closeIcon = document.getElementById('close-icon');
         create.addEventListener('click', () => {
             create.classList.toggle('expand');
-            if(create.classList.contains('expand')){
-                create.style.width = '200px';
-                create.style.height = '70px';
-            }else{
-                create.style.width = '140px';
-                create.style.height = '55px';
-            }
+            c_text.classList.toggle('translate');
+            icons.classList.toggle('show');
+            closeIcon.classList.toggle('hidden');
         });
     </script>
 </body>
