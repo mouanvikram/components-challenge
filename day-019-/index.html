@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bounce Animation </title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .bounce{
+            width: 140px;
+            height: 55px;
+            transition: all 0.3s cubic-bezier(0.4, 1.2, 0.165, 1);
+        }
+        .expand{
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="w-full h-screen flex items-center justify-center bg-gray-100">
+        <div id="create" class="bounce border border-gray-300 bg-white rounded-lg flex items-center justify-center">
+            Create New
+        </div>
+    </div>
+
+    <script>
+        const create = document.getElementById('create');
+
+        create.addEventListener('click', () => {
+            create.classList.toggle('expand');
+            if(create.classList.contains('expand')){
+                create.style.width = '200px';
+                create.style.height = '70px';
+            }else{
+                create.style.width = '140px';
+                create.style.height = '55px';
+            }
+        });
+    </script>
+</body>
+
+</html>
