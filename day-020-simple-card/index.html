@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Card</title>    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Simple Card</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
+        .image{
+            mask-image: linear-gradient(to top, transparent, black 50px);
+        }
     </style>
 </head>
+
 <body>
     <div class="w-full h-screen flex items-center justify-center bg-gray-100">
-        <div class="card w-80 bg-white rounded-lg shadow p-4">
-            <img src="https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-            <h2 class="text-xl font-semibold mb-2">Card Title</h2>
-            <p class="text-gray-600">This is a simple card component created using Tailwind CSS. It includes a title and some descriptive text.</p>
+        <div class="card w-80 h-100 flex flex-col bg-white rounded-lg shadow">
+            <div class="image">
+                <img class="w-full h-full rounded-t-lg"
+                    src="https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="">
+            </div>
+            <div class="content relative h-1/2">
+                <h2 class="text-xl font-semibold px-4 pt-4 ">Disney Land</h2>
+                <p class="text-gray-600 px-4 pt-2 pb-4">Experience the magic and wonder of Disney Land with our exclusive guide. </p>
+                <div class="absolute w-[95%] border border-gray-300 text-center m-2 p-2 rounded cursor-pointer hover:bg-gray-600 hover:text-white transition bottom-1">Enquire Now
+                        
+                </div>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
