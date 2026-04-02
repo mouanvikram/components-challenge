@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel Card</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: #f3f4f6; /* Tailwind gray-100 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .card {
+    width: 300px;
+    border-radius: 16px;
+    background: #ffffff;
+    /* Tailwind shadow-lg */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  /* IMAGE */
+  .card-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: #e5e7eb;
+  }
+
+  #pixelCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  .card-img-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 56px;
+    background: linear-gradient(to bottom, transparent, #fff);
+    pointer-events: none;
+  }
+
+  /* BODY */
+  .card-body {
+    padding: 16px 20px 12px;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 100px;
+    background: #f1f5f9;
+    color: #94a3b8;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-family: sans-serif;
+    font-size: 21px;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.2px;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    color: #94a3b8;
+    line-height: 1.75;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* PIXEL ZONE */
+  .pixel-zone {
+    position: relative;
+    height: 64px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 4px;
+    padding-bottom: 14px;
+    overflow: hidden;
+  }
+
+  .pixel-row {
+    display: flex;
+    gap: 4px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .px {
+    width: 13px;
+    height: 13px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .px.flying {
+    animation: floatUp var(--dur) var(--delay) ease-out forwards;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+    30%  { opacity: 0.9; }
+    80%  { opacity: 0.3; }
+    100% { transform: translate(var(--dx), -90px) scale(0.3); opacity: 0; }
+  }
+
+  .px.ghost {
+    background: transparent !important;
+    border: 1.5px dashed #e2e8f0;
+    animation: ghostIn 0.3s ease forwards;
+  }
+
+  @keyframes ghostIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .px.refill {
+    animation: refillIn 0.35s ease forwards;
+  }
+
+  @keyframes refillIn {
+    from { opacity: 0; transform: scale(0.4); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+
+  <!-- IMAGE -->
+  <div class="card-img-wrapper">
+    <canvas id="pixelCanvas" width="300" height="180"></canvas>
+  </div>
+
+  <!-- BODY -->
+  <div class="card-body">
+    <span class="card-tag">Design System</span>
+    <h2 class="card-title">Pixel Drift Component</h2>
+    <p class="card-desc">A modular card for creative portfolios. <b>Hover</b> to see the pixels drift away.</p>
+  </div>
+
+  <!-- PIXELS -->
+  <div class="pixel-zone" id="pixelZone"></div>
+
+</div>
+
+<script>
+
+/* ── Pixel zone animation ── */
+const COLORS = [
+  '#e5e7eb', // gray-200
+  '#d1d5db', // gray-300
+];
+
+const ROWS = 2;
+const COLS = 16;
+const grid = [];
+const pixelEls = [];
+
+function makeColor() {
+  return COLORS[Math.floor(Math.random() * COLORS.length)];
+}
+
+function buildGrid() {
+  const zone = document.getElementById('pixelZone');
+  zone.innerHTML = '';
+  grid.length = 0;
+  pixelEls.length = 0;
+
+  for (let r = 0; r < ROWS; r++) {
+    const rowEl = document.createElement('div');
+    rowEl.className = 'pixel-row';
+    const rowData = [];
+    const rowPxEls = [];
+
+    for (let c = 0; c < COLS; c++) {
+      const px = document.createElement('div');
+      px.className = 'px';
+      const color = makeColor();
+      const opacity = (0.5 + Math.random() * 0.5).toFixed(2);
+      px.style.background = color;
+      px.style.opacity = opacity;
+      px.dataset.color = color;
+      px.dataset.opacity = opacity;
+      rowEl.appendChild(px);
+      rowData.push({ color, opacity, flying: false });
+      rowPxEls.push(px);
+    }
+
+    zone.appendChild(rowEl);
+    grid.push(rowData);
+    pixelEls.push(rowPxEls);
+  }
+}
+
+function launchPixel(r, c) {
+  const data = grid[r][c];
+  if (data.flying) return;
+  data.flying = true;
+
+  const px = pixelEls[r][c];
+  const dx = (Math.random() * 28 - 14).toFixed(1);
+  const dur = (0.7 + Math.random() * 0.5).toFixed(2);
+
+  px.style.setProperty('--dx', dx + 'px');
+  px.style.setProperty('--dur', dur + 's');
+  px.style.setProperty('--delay', '0s');
+  px.classList.add('flying');
+
+  const flyDur = parseFloat(dur) * 1000;
+  setTimeout(() => {
+    px.classList.remove('flying');
+    px.style.background = 'transparent';
+    px.style.opacity = '1';
+    px.classList.add('ghost');
+
+    setTimeout(() => {
+      const newColor = makeColor();
+      const newOpacity = (0.5 + Math.random() * 0.5).toFixed(2);
+      px.classList.remove('ghost');
+      px.style.background = newColor;
+      px.style.opacity = newOpacity;
+      px.dataset.color = newColor;
+      px.dataset.opacity = newOpacity;
+      px.classList.add('refill');
+      data.color = newColor;
+      data.opacity = newOpacity;
+      data.flying = false;
+
+      setTimeout(() => px.classList.remove('refill'), 300);
+    }, 280);
+  }, flyDur);
+}
+
+function runWave() {
+  const count = 1 + Math.floor(Math.random() * 3);
+  const picks = new Set();
+  while (picks.size < count) {
+    const r = Math.floor(Math.random() * ROWS);
+    const c = Math.floor(Math.random() * COLS);
+    picks.add(`${r},${c}`);
+  }
+  picks.forEach(key => {
+    const [r, c] = key.split(',').map(Number);
+    launchPixel(r, c);
+  });
+}
+
+let waveInterval = null;
+const card = document.getElementById('card');
+
+card.addEventListener('mouseenter', () => {
+  runWave();
+  waveInterval = setInterval(runWave, 300);
+});
+
+card.addEventListener('mouseleave', () => {
+  clearInterval(waveInterval);
+  waveInterval = null;
+});
+
+buildGrid();
+</script>
+</body>
+</html>
