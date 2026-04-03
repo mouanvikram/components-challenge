@@ -54,9 +54,12 @@
             padding: 5px 10px;
             border: 1px solid transparent;
             transition: all 0.2s ease-in-out;
+            color: #908f8f;
+            font-weight: 500;
         }
 
         .item:hover {
+            color: black;
             border: 1px solid #d1d1d1;
             background: #f3f3f3;
         }
@@ -66,12 +69,11 @@
             /* background: #d1d1d1; */
             margin: 2px 0;
         }
-
     </style>
 </head>
 
-<body>
-    <div class="w-full h-screen flex items-center justify-center bg-gray-100">
+<body class="bg-gray-100">
+    <div class="w-full mt-10  flex items-center justify-center ">
         <div class="p-4 border border-gray-300 relative bg-white flex flex-col gap-2">
             <div class="absolute corners">
                 <div class="top-l corner"></div>
@@ -79,9 +81,12 @@
                 <div class="bottom-l corner"></div>
                 <div class="bottom-r corner"></div>
             </div>
-            <div class="w-70 input text-xs">
-                <input type="text" placeholder="SEARCH ACTIONS. . .">
-
+            <div class="w-70 flex">
+                <input class="w-full pl-3 text-sm" type="text" placeholder="SEARCH ACTIONS. . .">
+                <div class="flex gap-2">
+                    <div class="border border-gray-300 px-2 py-1 text-sm bg-gray-50 text-gray-500"><i class="hgi hgi-stroke hgi-command"></i></div>
+                    <div class="border border-gray-300 px-2 py-1 text-sm bg-gray-50 text-gray-500">K</div>
+                </div>
             </div>
             <div class="separator"></div>
             <div class="flex flex-col">
@@ -97,40 +102,54 @@
             </div>
             <div class="separator"></div>
             <div class="flex flex-col">
-                <div class="item w-70 flex gap-2">
-                    <div class="icon"><i class="hgi hgi-stroke hgi-file-01"></i></div>
-                    <span class="text-sm">MOVE TO</span>
+                <div class="item w-70 flex gap-2 justify-between">
+                    <div class="flex gap-2">
+                        <div class="icon"><i class="hgi hgi-stroke hgi-folder-export"></i></div>
+                        <span class="text-sm">MOVE TO</span>
+                    </div> <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
+
                 </div>
-                <div class="item w-70 flex gap-2">
-                    <i class="hgi hgi-stroke hgi-copy-01"></i>
-                    <span class="text-sm">ADD LABEL</span>
+                <div class="item w-70 flex gap-2 justify-between">
+                    <div class="flex gap-2">
+                        <i class="hgi hgi-stroke hgi-label-important"></i>
+                        <span class="text-sm">ADD LABEL</span>
+                    </div>
+                    <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
+
                 </div>
-                <div class="item w-70 flex gap-2">
-                    <div class="icon"><i class="hgi hgi-stroke hgi-file-01"></i></div>
-                    <span class="text-sm">MARK AS</span>
+                <div class="item w-70 flex gap-2 justify-between">
+                    <div class="flex gap-2"><i class="hgi hgi-stroke hgi-bookmark-check-01"></i>
+                        <span class="text-sm">MARK AS</span>
+                    </div>
+
+                    <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
                 </div>
-                <div class="item w-70 flex gap-2">
-                    <i class="hgi hgi-stroke hgi-copy-01"></i>
-                    <span class="text-sm">PRIORITY</span>
+                <div class="item w-70 flex gap-2 justify-between">
+                    <div class="flex gap-2"><i class="hgi hgi-stroke hgi-alert-circle"></i>
+                        <span class="text-sm">PRIORITY</span>
+                    </div>
+                    <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
                 </div>
             </div>
             <div class="separator"></div>
             <div class="flex flex-col">
                 <div class="item w-70 flex gap-2">
-                    <i class="hgi hgi-stroke hgi-copy-01"></i>
+                    <i class="hgi hgi-stroke hgi-time-schedule"></i>
                     <span class="text-sm">SCHEDULE REPLY</span>
                 </div>
                 <div class="item w-70 flex gap-2">
-                    <i class="hgi hgi-stroke hgi-copy-01"></i>
+                    <i class="hgi hgi-stroke hgi-note-add"></i>
                     <span class="text-sm">CREATE TASK</span>
                 </div>
                 <div class="item w-70 flex gap-2">
-                    <i class="hgi hgi-stroke hgi-copy-01"></i>
+                    <i class="hgi hgi-stroke hgi-calendar-04"></i>
                     <span class="text-sm">ADD TO CALENDAR</span>
                 </div>
-                <div class="item w-70 flex gap-2">
-                    <i class="hgi hgi-stroke hgi-copy-01"></i>
-                    <span class="text-sm">SNOOZE</span>
+                <div class="item w-70 flex gap-2 justify-between">
+                    <div class="flex gap-2"><i class="hgi hgi-stroke hgi-notification-snooze-02"></i>
+                        <span class="text-sm">SNOOZE</span>
+                    </div>
+                    <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
                 </div>
             </div>
 
@@ -141,11 +160,11 @@
                     <span class="text-sm">COPY LINK</span>
                 </div>
                 <div class="item w-70 flex gap-2">
-                    <i class="hgi hgi-stroke hgi-copy-01"></i>
+                    <i class="hgi hgi-stroke hgi-folder-download"></i>
                     <span class="text-sm">DOWNLOAD ATTACHMENTS</span>
                 </div>
                 <div class="item w-70 flex gap-2">
-                    <i class="hgi hgi-stroke hgi-copy-01"></i>
+                    <i class="hgi hgi-stroke hgi-printer"></i>
                     <span class="text-sm">PRINT</span>
                 </div>
             </div>
