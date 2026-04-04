@@ -13,39 +13,146 @@
             width: 100%;
             height: 100%;
             border-radius: 8px;
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
+            top: 0;
         }
+
+        .middle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 30px;
+            left: 5px;
+            background: white;
+            z-index: 0;
+            transition: all 0.5s ease;
+            border-radius: 10px;
+            transform-style: preserve-3d;
+            transition: all 0.4s ease;
+        }
+
+        .middle-front,
+        .middle-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            backface-visibility: hidden;
+            border-radius: 10px;
+        }
+
+        .middle-front {
+            transform: rotateY(180deg);
+        }
+
+        .middle-back {
+            transition: all .3s ease;
+            transform-origin: bottom center;
+        }
+
+        /* .folder:hover .middle-back {
+            transform: ;
+        } */
+
 
         .back {
             background: #f59e0b;
             transform: perspective(1200px) rotateY(0deg);
             transform-origin: left;
-
+            z-index: -1;
         }
 
-        .folder:hover .back {
-            transform: perspective(1200px) rotateY(20deg)
-        }
+
 
         .front {
-            background: linear-gradient(to bottom, #facc15, #f59e0b);
+            box-shadow: inset 0 2px 0 1px #fadfb0;
+            background: linear-gradient(to bottom, #facc15, #f29900);
             transform: perspective(1200px) rotateY(0deg);
             transform-origin: left;
+            z-index: 1;
         }
 
-        .folder:hover .front {
-            transform: perspective(1200px) rotateY(-45deg);
+
+
+        .folder.open .middle {
+            animation: opencard 1.4s ease forwards;
+        }
+
+        .folder.close .middle {
+            animation: closecard 1.4s ease forwards;
+        }
+
+        @keyframes opencard {
+            0% {
+                transform: translateX(0) rotateY(0deg) rotateZ(0deg);
+            }
+
+            35% {
+                transform: translateX(100%) rotateY(0deg) rotateZ(0deg);
+            }
+
+            75% {
+                transform: translateX(50%) rotateY(180deg) rotateZ(0deg);
+                box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.0);
+                z-index: 2;
+            }
+
+            100% {
+                box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+                transform: translateX(0) rotateY(180deg) rotateZ(3deg);
+                z-index: 2;
+            }
+        }
+
+        @keyframes closecard {
+            100% {
+                transform: translateX(0) rotateY(0deg) rotateZ(0deg);
+            }
+
+            75% {
+                transform: translateX(100%) rotateY(0deg) rotateZ(0deg);
+            }
+
+            35% {
+                transform: translateX(50%) rotateY(180deg) rotateZ(0deg);
+                z-index: 2;
+            }
+
+            0% {
+                box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+                transform: translateX(0) rotateY(180deg) rotateZ(3deg);
+                z-index: 2;
+            }
         }
     </style>
 </head>
 
-<body class="bg-[#f3f4f6]">
+<body class="bg-[#F7EAE0]">
     <div class="w-full h-screen flex items-center justify-center ">
-        <div class="folder relative w-[180px] h-[200px] ">
+        <div id="folder" class="folder relative w-[220px] h-[260px]  cursor-pointer">
             <!-- back -->
-            <div class="back"></div>
+            <div id="back" class="back"></div>
+            <div class="middle">
+                <div class="middle-front text-[10px] p-2 flex flex-col gap-2 rounded ">
+                    <p>This document is classified and intended solely for authorized personnel.</p>
+
+                    <p>Access without proper clearance is strictly prohibited and may lead to serious consequences.</p>
+
+                    <p>By continuing, you acknowledge that you understand the sensitivity of the material and agree to
+                        handle it responsibly.</p>
+
+                    <p>You really don't follow instructions, do you?</p>
+                </div>
+                <div id="middle-back" class="middle-back px-5 py-2 text-xs">
+                    <div class="w-full h-full rotate-90">
+                        <p>DO NOT OPEN</p>
+                    </div>
+                </div>
+            </div>
             <!-- front -->
-            <div class="front p-4 flex flex-col justify-between">
+            <div id="front" class="front p-4 flex flex-col justify-between">
                 <div class="logo"></div>
                 <div class="label text-white">
                     <p class="font-semibold uppercase text-xs">Confidential Files</p>
@@ -54,6 +161,52 @@
             </div>
         </div>
     </div>
+    <script>
+        const folder = document.getElementById("folder");
+        const front = document.getElementById("front");
+        const back = document.getElementById("back");
+        const middleBack = document.getElementById("middle-back");
+
+        folder.addEventListener("click", function () {
+            if (folder.classList.contains("open")) {
+                folder.classList.remove("open")
+                folder.classList.add("close")
+                setTimeout(() => {
+                    front.style.transform = "perspective(1200px) rotateY(-45deg)";
+                    back.style.transform = "perspective(1200px) rotateY(20deg)";
+                }, 400)
+                setTimeout(() => {
+                    front.style.transform = "perspective(1200px) rotateY(0deg)";
+                    back.style.transform = "perspective(1200px) rotateY(0deg)";
+                }, 1500);
+            }
+            else {
+                front.style.transform = "perspective(1200px) rotateY(-45deg)";
+                back.style.transform = "perspective(1200px) rotateY(20deg)";
+                setTimeout(() => {
+                    front.style.transform = "perspective(1200px) rotateY(0deg)";
+                    back.style.transform = "perspective(1200px) rotateY(0deg)";
+                }, 1300);
+                folder.classList.remove("close")
+                folder.classList.add("open")
+
+            }
+        });
+
+        folder.addEventListener("mouseenter", function () {
+            if (!folder.classList.contains("open")) {
+                front.style.transform = "perspective(1200px) rotateY(-45deg)";
+                back.style.transform = "perspective(1200px) rotateY(20deg)";
+                middleBack.style.transform = "rotateZ(5deg)";
+
+            }
+        })
+        folder.addEventListener("mouseleave", function () {
+            front.style.transform = "perspective(1200px) rotateY(0deg)";
+            back.style.transform = "perspective(1200px) rotateY(0deg)";
+            middleBack.style.transform = "rotateZ(0deg)";
+        })
+    </script>
 </body>
 
 </html>
