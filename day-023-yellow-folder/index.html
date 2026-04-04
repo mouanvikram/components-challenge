@@ -1,12 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Blue Folder Micro Interaction</title>
+    <style>
+        .front,
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            transition: all 0.5s ease;
+        }
+
+        .back {
+            background: #f59e0b;
+            transform: perspective(1200px) rotateY(0deg);
+            transform-origin: left;
+
+        }
+
+        .folder:hover .back {
+            transform: perspective(1200px) rotateY(20deg)
+        }
+
+        .front {
+            background: linear-gradient(to bottom, #facc15, #f59e0b);
+            transform: perspective(1200px) rotateY(0deg);
+            transform-origin: left;
+        }
+
+        .folder:hover .front {
+            transform: perspective(1200px) rotateY(-45deg);
+        }
+    </style>
 </head>
-<body class="bg-gray-100" >
-    
+
+<body class="bg-[#f3f4f6]">
+    <div class="w-full h-screen flex items-center justify-center ">
+        <div class="folder relative w-[180px] h-[200px] ">
+            <!-- back -->
+            <div class="back"></div>
+            <!-- front -->
+            <div class="front p-4 flex flex-col justify-between">
+                <div class="logo"></div>
+                <div class="label text-white">
+                    <p class="font-semibold uppercase text-xs">Confidential Files</p>
+                    <p class=" uppercase text-[10px] ">Internal Use Only</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
