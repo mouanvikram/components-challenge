@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Chips</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .chip {
+            color: #141414;
+            font-weight: 500;
+            font-size: 18px;
+            background-color: #ececec;
+            padding: 10px;
+        }
+
+        .chip-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: #8f8f8f;
+        }
+
+        .chip:nth-child(1) {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chip:nth-child(3) {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chips {
+            display: flex;
+            gap: 0px;
+            transform-origin: center;
+        }
+
+        .chips.split {
+            animation: split 0.6s ease forwards;
+        }
+
+        .chips.join {
+            animation: join 0.6s ease forwards;
+        }
+
+        .chips.split,
+        .chips.join {
+            animation-duration: 0.6s;
+            animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* spring easing */
+        }
+
+        @keyframes split {
+            0% {
+                gap: 0px;
+                transform: scaleX(1);
+            }
+
+            30% {
+                gap: 15px;
+                transform: scaleX(1.08);
+            }
+
+            60% {
+                gap: 8px;
+                transform: scaleX(0.98);
+            }
+
+            80% {
+                gap: 9px;
+                transform: scaleX(1.02);
+            }
+
+            100% {
+                gap: 10px;
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes join {
+            0% {
+                gap: 10px;
+                transform: scaleX(1);
+            }
+
+            20% {
+                gap: 9px;
+                transform: scaleX(1.02);
+            }
+
+            40% {
+                gap: 8px;
+                transform: scaleX(0.97);
+            }
+
+            70% {
+                gap: 15px;
+                transform: scaleX(1.06);
+            }
+
+            100% {
+                gap: 0px;
+                transform: scaleX(1);
+            }
+        }
+
+        /* icon swap */
+        #pencil {
+            position: relative;
+            width: 40px;
+        }
+
+        #pencil svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+        }
+
+        /* default state (pencil visible) */
+        #pencil .icon-pencil {
+            opacity: 1;
+            filter: blur(0px);
+        }
+
+        #pencil .icon-check {
+            opacity: 0;
+            filter: blur(6px);
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        /* when split (check visible) */
+        .chips.split #pencil .icon-pencil {
+            opacity: 0;
+            filter: blur(6px);
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        .chips.split #pencil .icon-check {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translate(-50%, -50%) scale(1);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="w-full h-screen flex items-center justify-center">
+        <div class="chips px-3">
+            <div class="chip hours">12<span class="chip-text ml-2">Hr.</span></div>
+            <div class="chip minutes">45<span class="chip-text ml-2">Min.</span></div>
+            <div id="pencil" class="chip cursor-pointer">
+
+                <!-- pencil -->
+                <svg class="icon-pencil stroke-[#8f8f8f]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                        d="M3.89089 20.8727L3 21L3.12727 20.1091C3.32086 18.754 3.41765 18.0764 3.71832 17.4751C4.01899 16.8738 4.50296 16.3898 5.47091 15.4218L16.9827 3.91009C17.4062 3.48654 17.618 3.27476 17.8464 3.16155C18.2811 2.94615 18.7914 2.94615 19.2261 3.16155C19.4546 3.27476 19.6663 3.48654 20.0899 3.91009C20.5135 4.33365 20.7252 4.54543 20.8385 4.77389C21.0539 5.20856 21.0539 5.71889 20.8385 6.15356C20.7252 6.38201 20.5135 6.59379 20.0899 7.01735L8.57816 18.5291C7.61022 19.497 7.12625 19.981 6.52491 20.2817C5.92357 20.5823 5.246 20.6791 3.89089 20.8727Z" />
+                    <path d="M6 15L9 18M8.5 12.5L11.5 15.5" />
+                </svg>
+
+                <!-- checkmark -->
+                <svg class="icon-check stroke-[#8f8f8f]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M5 12l5 5L19 7" />
+                </svg>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const pencil = document.getElementById('pencil');
+        const chips = document.querySelector('.chips');
+        const chip = document.querySelectorAll('.chip');
+        let isOpen = false;
+
+        pencil.addEventListener('click', function () {
+            isOpen = !isOpen;
+
+            if (isOpen) {
+                chips.classList.remove('join');
+                // void chips.offsetWidth;
+                chips.classList.add('split');
+                chip.forEach(function (c, v) {
+                    c.classList.add('rounded-[5px]')
+                })
+            } else {
+                chips.classList.remove('split');
+                // void chips.offsetWidth;
+                chips.classList.add('join');
+                chip.forEach(function (c, v) {
+                    c.classList.remove('rounded-[5px]')
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>
