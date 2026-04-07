@@ -1,0 +1,15 @@
+{
+  "name": "day-026-dashboard",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "live":"bun index.html"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
