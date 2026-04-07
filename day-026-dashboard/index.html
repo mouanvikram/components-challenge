@@ -190,7 +190,7 @@
                     <i
                         class="hgi hgi-stroke hgi-search-01 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
                     <input type="text" id="searchInput" placeholder="Search by coin or symbol..."
-                        class="w-full pl-9 pr-4 py-2 text-sm text-gray-800 border border-gray-500  focus:outline-none focus:ring-1 focus:ring-gray-800  text-gray-200 placeholder-gray-500">
+                        class="w-full pl-9 pr-4 py-2 text-sm text-gray-800 border border-gray-300  focus:outline-none focus:ring-1 focus:ring-gray-800  text-gray-200 placeholder-gray-500">
                 </div>
                 <div class="relative">
                     <select id="currencySelect"
@@ -1837,7 +1837,6 @@
 
             try {
                 // Fetch top 50 coins based on Market Cap
-                const options = { method: 'GET', headers: { 'x-cg-pro-api-key': "CG-7xyyDxePHn9BGiDYfKzyj35J" } };
                 const response = await fetch(`${API_URL}?vs_currency=${currentCurrency}&order=market_cap_desc&per_page=50&page=1&sparkline=false`);
 
                 if (!response.ok) {
