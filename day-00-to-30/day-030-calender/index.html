@@ -1,199 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Deck Calendar</title>
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-  body { font-family: 'DM Sans', sans-serif; }
-  .playfair { font-family: 'Playfair Display', serif; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deck Calendar</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Geist Mono", monospace;
+            font-optical-sizing: auto;
+        }
 
-  @keyframes flipOut {
-    0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-    30%  { transform: translateY(-22px) scale(1.02) rotate(-1deg); opacity: 1; }
-    100% { transform: translateY(60px) scale(0.92) rotate(2.5deg); opacity: 0; }
-  }
-  @keyframes flipIn {
-    0%   { transform: translateY(-50px) scale(0.93) rotate(-1.5deg); opacity: 0; }
-    50%  { transform: translateY(6px) scale(1.01) rotate(0.4deg); opacity: 1; }
-    100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-  }
-  @keyframes flipOutBack {
-    0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-    30%  { transform: translateY(-22px) scale(1.02) rotate(1deg); opacity: 1; }
-    100% { transform: translateY(60px) scale(0.92) rotate(-2.5deg); opacity: 0; }
-  }
-  @keyframes flipInBack {
-    0%   { transform: translateY(-50px) scale(0.93) rotate(1.5deg); opacity: 0; }
-    50%  { transform: translateY(6px) scale(1.01) rotate(-0.4deg); opacity: 1; }
-    100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-  }
+        .day-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            line-height: 1;
+        }
 
-  .anim-out-next { animation: flipOut     0.36s cubic-bezier(0.4,0,0.6,1) forwards; }
-  .anim-in-next  { animation: flipIn      0.40s cubic-bezier(0.2,0,0.2,1) forwards; }
-  .anim-out-prev { animation: flipOutBack 0.36s cubic-bezier(0.4,0,0.6,1) forwards; }
-  .anim-in-prev  { animation: flipInBack  0.40s cubic-bezier(0.2,0,0.2,1) forwards; }
+        .deck-card {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            top: 0;
+            left: 0;
+            border-radius: 1rem;
+            border: 1px solid #e8e2da;
+            background: #fff;
+            transform-origin: bottom left;
+            will-change: transform, opacity;
+        }
 
-  .day-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    line-height: 1;
-  }
-</style>
+        .deck-card.pos-0 {
+            z-index: 10;
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+
+        .deck-card.pos-1 {
+            z-index: 2;
+            transform: rotate(0.9deg);
+            opacity: 1;
+        }
+
+        .deck-card.pos-2 {
+            z-index: 1;
+            transform: rotate(1.8deg);
+            opacity: 1;
+        }
+
+        @keyframes cardOut {
+            0% {
+                transform: rotate(0deg);
+                opacity: 1;
+            }
+
+            80% {
+                transform: rotate(-6deg);
+                filter: blur(5px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotate(-22deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes card1to0 {
+            0% {
+                transform: rotate(0.9deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes card2to1 {
+            0% {
+                transform: rotate(1.8deg);
+            }
+
+            100% {
+                transform: rotate(0.9deg);
+            }
+        }
+
+        @keyframes card0to2 {
+            0% {
+                transform: rotate(-22deg);
+                opacity: 0;
+            }
+
+            60% {
+                opacity: 0;
+            }
+
+            100% {
+                transform: rotate(1.8deg);
+                opacity: 1;
+            }
+        }
+
+        .anim-out {
+            animation: cardOut 0.3s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+        }
+
+        .anim-1to0 {
+            animation: card1to0 0.42s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+        }
+
+        .anim-2to1 {
+            animation: card2to1 0.42s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+        }
+
+        .anim-0to2 {
+            animation: card0to2 0.55s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+        }
+
+        .active {
+            padding: 20px 20px 14px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
-<body class="bg-[#f5f2ee] min-h-screen flex flex-col items-center justify-center py-10">
 
-  <!-- Deck -->
-  <div class="relative mb-8" style="width:300px; height:400px;">
+<body class="bg-[#f7f7f5] min-h-screen flex flex-col items-center justify-center py-10">
 
-    <!-- Shadow card 2 (bottom) -->
-    <div class="absolute rounded-2xl border border-[#e0dbd2]"
-         style="background:#f0ece6; width:300px; height:400px; top:10px; left:8px; z-index:1; transform:rotate(1.4deg);"></div>
+    <div class="relative mb-8" style="width:300px; height:400px;">
+        <div id="card2" class="deck-card pos-2"></div>
+        <div id="card1" class="deck-card pos-1"></div>
+        <!-- card0 starts as front and holds the content -->
+        <div id="card0" class="deck-card pos-0 active">
+            <div id="calContent">
 
-    <!-- Shadow card 1 -->
-    <div class="absolute rounded-2xl border border-[#eae5de]"
-         style="background:#f7f5f2; width:300px; height:400px; top:5px; left:3px; z-index:2; transform:rotate(-0.6deg);"></div>
+                <div class="flex-shrink-0">
+                    <div id="cardMonth" class="text-[10px] tracking-[0.18em] uppercase text-[#a09286] mb-0.5"></div>
+                    <div id="cardYear" class="text-[22px] font-normal text-[#2a2520] leading-none mb-3"></div>
+                </div>
 
-    <!-- Main card -->
-    <div id="mainCard"
-         class="absolute rounded-2xl border border-[#e8e2da] bg-white will-change-transform"
-         style="width:300px; height:400px; top:0; left:0; z-index:10;
-                box-shadow:0 4px 28px rgba(0,0,0,0.07),0 1px 4px rgba(0,0,0,0.04);
-                display:flex; flex-direction:column; padding: 20px 20px 14px 20px;">
+                <div class="h-px bg-[#ece8e2] mt-2 flex-shrink-0"></div>
 
-      <!-- Month & Year -->
-      <div class="playfair flex-shrink-0">
-        <div id="cardMonth" class="text-[10px] tracking-[0.18em] uppercase text-[#a09286] mb-0.5"></div>
-        <div id="cardYear"  class="text-[22px] font-normal text-[#2a2520] leading-none mb-3"></div>
-      </div>
+                <div class="grid grid-cols-7 flex-shrink-0 mt-3">
+                    <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Su
+                    </div>
+                    <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Mo
+                    </div>
+                    <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Tu
+                    </div>
+                    <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">We
+                    </div>
+                    <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Th
+                    </div>
+                    <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Fr
+                    </div>
+                    <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Sa
+                    </div>
+                </div>
 
-      <!-- Divider -->
-      <div class="h-px bg-[#ece8e2] mb-2 flex-shrink-0"></div>
+                <div id="daysGrid" class="grid grid-cols-7 flex-1 min-h-0"></div>
 
-      <!-- Weekday labels -->
-      <div class="grid grid-cols-7 flex-shrink-0 mb-1">
-        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Su</div>
-        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Mo</div>
-        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Tu</div>
-        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">We</div>
-        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Th</div>
-        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Fr</div>
-        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Sa</div>
-      </div>
-
-      <!-- Days grid — takes remaining height, never overflows -->
-      <div id="daysGrid" class="grid grid-cols-7 flex-1 min-h-0" style="align-content:space-evenly;"></div>
-
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Nav -->
-  <div class="flex items-center gap-6">
-    <button id="prevBtn"
-            class="w-10 h-10 rounded-full border border-[#d8d2ca] flex items-center justify-center text-[#5a524a] hover:bg-[#ece8e2] transition-colors text-base">
-      &#8592;
-    </button>
-    <span id="navLabel" class="text-sm text-[#9b8f82] tracking-wide min-w-[110px] text-center"></span>
-    <button id="nextBtn"
-            class="w-10 h-10 rounded-full border border-[#d8d2ca] flex items-center justify-center text-[#5a524a] hover:bg-[#ece8e2] transition-colors text-base">
-      &#8594;
-    </button>
-  </div>
+    <!-- Nav -->
+    <div class="flex items-center gap-6">
+        <button id="prevBtn"
+            class="w-10 h-10 bg-white border border-[#d8d2ca] rounded-lg flex items-center justify-center text-[#5a524a] hover:bg-[#ece8e2] transition-colors"></button>
+        <span id="navLabel" class="text-sm text-[#9b8f82] tracking-wide min-w-[110px] text-center"></span>
+        <button id="nextBtn"
+            class="w-10 h-10 bg-white border border-[#d8d2ca] rounded-lg flex items-center justify-center text-[#5a524a] hover:bg-[#ece8e2] transition-colors"></button>
+    </div>
 
-<script>
-  const MONTHS = [
-    'January','February','March','April','May','June',
-    'July','August','September','October','November','December'
-  ];
+    <script>
+        const MONTHS = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
 
-  let now = new Date();
-  let cur = { y: now.getFullYear(), m: now.getMonth() };
-  let animating = false;
+        let now = new Date();
+        let cur = { y: now.getFullYear(), m: now.getMonth() };
+        let animating = false;
+        let front = 0;
 
-  function daysInMonth(y, m) { return new Date(y, m + 1, 0).getDate(); }
-  function firstDay(y, m)    { return new Date(y, m, 1).getDay(); }
+        function daysInMonth(y, m) { return new Date(y, m + 1, 0).getDate(); }
+        function firstDay(y, m) { return new Date(y, m, 1).getDay(); }
 
-  function renderGrid(y, m) {
-    const today = new Date();
-    const isNow = today.getFullYear() === y && today.getMonth() === m;
-    const fd      = firstDay(y, m);
-    const dim     = daysInMonth(y, m);
-    const prevDim = daysInMonth(y, m === 0 ? 11 : m - 1);
+        function getCards() {
+            const cards = document.querySelectorAll('.deck-card');
 
-    document.getElementById('cardMonth').textContent = MONTHS[m];
-    document.getElementById('cardYear').textContent  = y;
-    document.getElementById('navLabel').textContent  = MONTHS[m].slice(0, 3) + ' ' + y;
+            let pos0, pos1, pos2;
 
-    const grid = document.getElementById('daysGrid');
-    grid.innerHTML = '';
+            cards.forEach(card => {
+                if (card.classList.contains('pos-0')) pos0 = card;
+                else if (card.classList.contains('pos-1')) pos1 = card;
+                else if (card.classList.contains('pos-2')) pos2 = card;
+            });
 
-    function makeCell(text, colorClass, isToday) {
-      const el = document.createElement('div');
-      el.className = 'day-cell ' + (isToday
-        ? 'bg-[#2a2520] text-white font-medium'
-        : colorClass);
-      el.textContent = text;
-      return el;
-    }
+            return [pos0, pos1, pos2];
+        }
 
-    // Trailing days from previous month
-    for (let i = 0; i < fd; i++) {
-      grid.appendChild(makeCell(prevDim - fd + i + 1, 'text-[#d4cfc8]', false));
-    }
+        function renderGrid(y, m) {
+            const today = new Date();
+            const isNow = today.getFullYear() === y && today.getMonth() === m;
+            const fd = firstDay(y, m);
+            const dim = daysInMonth(y, m);
+            const prevDim = daysInMonth(y, m === 0 ? 11 : m - 1);
 
-    // Current month days
-    for (let d = 1; d <= dim; d++) {
-      const isSun = new Date(y, m, d).getDay() === 0;
-      const isTod = isNow && d === today.getDate();
-      grid.appendChild(makeCell(d, isSun ? 'text-[#c17a5a]' : 'text-[#3a342d]', isTod));
-    }
+            document.getElementById('cardMonth').textContent = MONTHS[m];
+            document.getElementById('cardYear').textContent = y;
+            document.getElementById('navLabel').textContent = MONTHS[m].slice(0, 3) + ' ' + y;
 
-    // Leading days from next month
-    const remainder = (fd + dim) % 7;
-    if (remainder > 0) {
-      for (let d = 1; d <= 7 - remainder; d++) {
-        grid.appendChild(makeCell(d, 'text-[#d4cfc8]', false));
-      }
-    }
-  }
+            const grid = document.getElementById('daysGrid');
+            grid.innerHTML = '';
 
-  function navigate(dir) {
-    if (animating) return;
-    animating = true;
+            function makeCell(text, colorClass, isToday) {
+                const el = document.createElement('div');
+                el.className = 'day-cell ' + (isToday ? 'bg-[#2a2520] text-white font-medium' : colorClass);
+                el.textContent = text;
+                return el;
+            }
 
-    const card   = document.getElementById('mainCard');
-    const outCls = dir === 1 ? 'anim-out-next' : 'anim-out-prev';
-    const inCls  = dir === 1 ? 'anim-in-next'  : 'anim-in-prev';
+            for (let i = 0; i < fd; i++)
+                grid.appendChild(makeCell(prevDim - fd + i + 1, 'text-[#d4cfc8]', false));
 
-    card.classList.add(outCls);
+            for (let d = 1; d <= dim; d++) {
+                const isSun = new Date(y, m, d).getDay() === 0;
+                const isTod = isNow && d === today.getDate();
+                grid.appendChild(makeCell(d, isSun ? 'text-[#c17a5a]' : 'text-[#3a342d]', isTod));
+            }
 
-    setTimeout(() => {
-      cur.m += dir;
-      if (cur.m > 11) { cur.m = 0; cur.y++; }
-      if (cur.m < 0)  { cur.m = 11; cur.y--; }
+            const remainder = (fd + dim) % 7;
+            if (remainder > 0)
+                for (let d = 1; d <= 7 - remainder; d++)
+                    grid.appendChild(makeCell(d, 'text-[#d4cfc8]', false));
+        }
 
-      renderGrid(cur.y, cur.m);
-      card.classList.remove(outCls);
-      card.classList.add(inCls);
+        function go(dir) {
+            if (animating) return false;
+            animating = true;
 
-      setTimeout(() => {
-        card.classList.remove(inCls);
-        animating = false;
-      }, 420);
-    }, 340);
-  }
+            const fc = document.querySelector('.deck-card.pos-0');
+            const mc = document.querySelector('.deck-card.pos-1');
+            const bc = document.querySelector('.deck-card.pos-2');
 
-  document.getElementById('nextBtn').addEventListener('click', () => navigate(1));
-  document.getElementById('prevBtn').addEventListener('click', () => navigate(-1));
+            // Start animations
+            fc.classList.add('anim-out');
 
-  renderGrid(cur.y, cur.m);
-</script>
+            mc.classList.add('anim-1to0');
+
+            bc.classList.add('anim-2to1');
+
+            console.log(fc, mc, bc)
+            // Midway: move content into new front card, update data, send old front to back
+            setTimeout(() => {
+                fc.classList.remove('pos-0');
+                mc.classList.remove('pos-1');
+                bc.classList.remove('pos-2');
+
+                // Advance month
+                cur.m += dir;
+                if (cur.m > 11) { cur.m = 0; cur.y++; }
+                if (cur.m < 0) { cur.m = 11; cur.y--; }
+
+                // Move content node into the new front card (mc)
+                const contentNode = document.getElementById('calContent');
+                mc.appendChild(contentNode);
+                mc.style.padding = '20px 20px 14px 20px';
+                mc.style.display = 'flex';
+                mc.style.flexDirection = 'column';
+
+                // Strip layout styles from old front
+                fc.style.padding = '';
+                fc.style.display = '';
+                fc.style.flexDirection = '';
+
+                renderGrid(cur.y, cur.m);
+
+                // Send old front card to the back of the deck
+                fc.classList.remove('anim-out');
+                fc.classList.add('anim-0to2');
+
+                setTimeout(() => {
+                    fc.classList.remove('anim-out', 'anim-0to2');
+                    mc.classList.remove('anim-1to0');
+                    bc.classList.remove('anim-2to1');
+
+                    fc.className = 'deck-card pos-2';
+                    mc.className = 'deck-card pos-0';
+                    bc.className = 'deck-card pos-1';
+
+                    // front = mIdx;
+                    animating = false;
+                }, 0);
+                console.log(fc, mc, bc)
+            }, 360);
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => go(1));
+        document.getElementById('prevBtn').addEventListener('click', () => go(-1));
+
+        renderGrid(cur.y, cur.m);
+    </script>
 </body>
+
 </html>
