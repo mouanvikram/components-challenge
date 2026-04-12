@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Deck Calendar</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  body { font-family: 'DM Sans', sans-serif; }
+  .playfair { font-family: 'Playfair Display', serif; }
+
+  @keyframes flipOut {
+    0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+    30%  { transform: translateY(-22px) scale(1.02) rotate(-1deg); opacity: 1; }
+    100% { transform: translateY(60px) scale(0.92) rotate(2.5deg); opacity: 0; }
+  }
+  @keyframes flipIn {
+    0%   { transform: translateY(-50px) scale(0.93) rotate(-1.5deg); opacity: 0; }
+    50%  { transform: translateY(6px) scale(1.01) rotate(0.4deg); opacity: 1; }
+    100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+  }
+  @keyframes flipOutBack {
+    0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+    30%  { transform: translateY(-22px) scale(1.02) rotate(1deg); opacity: 1; }
+    100% { transform: translateY(60px) scale(0.92) rotate(-2.5deg); opacity: 0; }
+  }
+  @keyframes flipInBack {
+    0%   { transform: translateY(-50px) scale(0.93) rotate(1.5deg); opacity: 0; }
+    50%  { transform: translateY(6px) scale(1.01) rotate(-0.4deg); opacity: 1; }
+    100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .anim-out-next { animation: flipOut     0.36s cubic-bezier(0.4,0,0.6,1) forwards; }
+  .anim-in-next  { animation: flipIn      0.40s cubic-bezier(0.2,0,0.2,1) forwards; }
+  .anim-out-prev { animation: flipOutBack 0.36s cubic-bezier(0.4,0,0.6,1) forwards; }
+  .anim-in-prev  { animation: flipInBack  0.40s cubic-bezier(0.2,0,0.2,1) forwards; }
+
+  .day-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    line-height: 1;
+  }
+</style>
+</head>
+<body class="bg-[#f5f2ee] min-h-screen flex flex-col items-center justify-center py-10">
+
+  <!-- Deck -->
+  <div class="relative mb-8" style="width:300px; height:400px;">
+
+    <!-- Shadow card 2 (bottom) -->
+    <div class="absolute rounded-2xl border border-[#e0dbd2]"
+         style="background:#f0ece6; width:300px; height:400px; top:10px; left:8px; z-index:1; transform:rotate(1.4deg);"></div>
+
+    <!-- Shadow card 1 -->
+    <div class="absolute rounded-2xl border border-[#eae5de]"
+         style="background:#f7f5f2; width:300px; height:400px; top:5px; left:3px; z-index:2; transform:rotate(-0.6deg);"></div>
+
+    <!-- Main card -->
+    <div id="mainCard"
+         class="absolute rounded-2xl border border-[#e8e2da] bg-white will-change-transform"
+         style="width:300px; height:400px; top:0; left:0; z-index:10;
+                box-shadow:0 4px 28px rgba(0,0,0,0.07),0 1px 4px rgba(0,0,0,0.04);
+                display:flex; flex-direction:column; padding: 20px 20px 14px 20px;">
+
+      <!-- Month & Year -->
+      <div class="playfair flex-shrink-0">
+        <div id="cardMonth" class="text-[10px] tracking-[0.18em] uppercase text-[#a09286] mb-0.5"></div>
+        <div id="cardYear"  class="text-[22px] font-normal text-[#2a2520] leading-none mb-3"></div>
+      </div>
+
+      <!-- Divider -->
+      <div class="h-px bg-[#ece8e2] mb-2 flex-shrink-0"></div>
+
+      <!-- Weekday labels -->
+      <div class="grid grid-cols-7 flex-shrink-0 mb-1">
+        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Su</div>
+        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Mo</div>
+        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Tu</div>
+        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">We</div>
+        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Th</div>
+        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Fr</div>
+        <div class="text-center text-[8.5px] font-medium tracking-widest uppercase text-[#c8bfb4] py-0.5">Sa</div>
+      </div>
+
+      <!-- Days grid — takes remaining height, never overflows -->
+      <div id="daysGrid" class="grid grid-cols-7 flex-1 min-h-0" style="align-content:space-evenly;"></div>
+
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <div class="flex items-center gap-6">
+    <button id="prevBtn"
+            class="w-10 h-10 rounded-full border border-[#d8d2ca] flex items-center justify-center text-[#5a524a] hover:bg-[#ece8e2] transition-colors text-base">
+      &#8592;
+    </button>
+    <span id="navLabel" class="text-sm text-[#9b8f82] tracking-wide min-w-[110px] text-center"></span>
+    <button id="nextBtn"
+            class="w-10 h-10 rounded-full border border-[#d8d2ca] flex items-center justify-center text-[#5a524a] hover:bg-[#ece8e2] transition-colors text-base">
+      &#8594;
+    </button>
+  </div>
+
+<script>
+  const MONTHS = [
+    'January','February','March','April','May','June',
+    'July','August','September','October','November','December'
+  ];
+
+  let now = new Date();
+  let cur = { y: now.getFullYear(), m: now.getMonth() };
+  let animating = false;
+
+  function daysInMonth(y, m) { return new Date(y, m + 1, 0).getDate(); }
+  function firstDay(y, m)    { return new Date(y, m, 1).getDay(); }
+
+  function renderGrid(y, m) {
+    const today = new Date();
+    const isNow = today.getFullYear() === y && today.getMonth() === m;
+    const fd      = firstDay(y, m);
+    const dim     = daysInMonth(y, m);
+    const prevDim = daysInMonth(y, m === 0 ? 11 : m - 1);
+
+    document.getElementById('cardMonth').textContent = MONTHS[m];
+    document.getElementById('cardYear').textContent  = y;
+    document.getElementById('navLabel').textContent  = MONTHS[m].slice(0, 3) + ' ' + y;
+
+    const grid = document.getElementById('daysGrid');
+    grid.innerHTML = '';
+
+    function makeCell(text, colorClass, isToday) {
+      const el = document.createElement('div');
+      el.className = 'day-cell ' + (isToday
+        ? 'bg-[#2a2520] text-white font-medium'
+        : colorClass);
+      el.textContent = text;
+      return el;
+    }
+
+    // Trailing days from previous month
+    for (let i = 0; i < fd; i++) {
+      grid.appendChild(makeCell(prevDim - fd + i + 1, 'text-[#d4cfc8]', false));
+    }
+
+    // Current month days
+    for (let d = 1; d <= dim; d++) {
+      const isSun = new Date(y, m, d).getDay() === 0;
+      const isTod = isNow && d === today.getDate();
+      grid.appendChild(makeCell(d, isSun ? 'text-[#c17a5a]' : 'text-[#3a342d]', isTod));
+    }
+
+    // Leading days from next month
+    const remainder = (fd + dim) % 7;
+    if (remainder > 0) {
+      for (let d = 1; d <= 7 - remainder; d++) {
+        grid.appendChild(makeCell(d, 'text-[#d4cfc8]', false));
+      }
+    }
+  }
+
+  function navigate(dir) {
+    if (animating) return;
+    animating = true;
+
+    const card   = document.getElementById('mainCard');
+    const outCls = dir === 1 ? 'anim-out-next' : 'anim-out-prev';
+    const inCls  = dir === 1 ? 'anim-in-next'  : 'anim-in-prev';
+
+    card.classList.add(outCls);
+
+    setTimeout(() => {
+      cur.m += dir;
+      if (cur.m > 11) { cur.m = 0; cur.y++; }
+      if (cur.m < 0)  { cur.m = 11; cur.y--; }
+
+      renderGrid(cur.y, cur.m);
+      card.classList.remove(outCls);
+      card.classList.add(inCls);
+
+      setTimeout(() => {
+        card.classList.remove(inCls);
+        animating = false;
+      }, 420);
+    }, 340);
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => navigate(1));
+  document.getElementById('prevBtn').addEventListener('click', () => navigate(-1));
+
+  renderGrid(cur.y, cur.m);
+</script>
+</body>
+</html>
