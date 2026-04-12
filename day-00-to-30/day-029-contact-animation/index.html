@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vikram — Profile Card</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hugeicons/font/dist/hugeicons.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f4f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: #f5f4f0;
+      border-radius: 24px;
+      padding: 52px 64px 52px;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      background: #f0ede8;
+      color: #666;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+    }
+
+    .name-heading {
+      font-size: 3.2rem;
+      font-weight: 600;
+      color: #111;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-top: 10px;
+    }
+
+    .email-row {
+      font-family: 'DM Mono', monospace;
+      font-size: 2.6rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      user-select: none;
+      margin-top: 18px;
+      margin-bottom: 48px;
+      position: relative;
+      display: inline-block;
+    }
+
+    #emailText {
+      display: flex;
+      align-items: baseline;
+    }
+
+    .part {
+      transition: color 0.22s ease;
+    }
+    .part-name   { color: #888; }
+    .part-at     { color: #bbb; }
+    .part-domain { color: #888; }
+
+    #bracketSvg {
+      position: absolute;
+      bottom: -16px;
+      left: 0;
+      width: 100%;
+      height: 18px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .icon-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid #e8e6e0;
+      background: #fafaf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.12s, color 0.15s;
+      color: #666;
+      font-size: 20px;
+    }
+    .icon-btn:hover  { background: #f0ede8; border-color: #ccc; transform: translateY(-1px); color: #111; }
+    .icon-btn.active { background: #111; border-color: #111; color: #fff; transform: translateY(-1px); }
+
+    .icon-label {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-top: 6px;
+      text-align: center;
+      transition: color 0.15s;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="email-row" id="emailRow">
+    <div id="emailText">
+      <span class="part part-name"   id="pName">mouanvikram</span>
+      <span class="part part-at"     id="pAt">@</span>
+      <span class="part part-domain" id="pDomain">gmail.com</span>
+    </div>
+
+    <svg id="bracketSvg" xmlns="http://www.w3.org/2000/svg">
+      <path id="bracketPath"
+            fill="none"
+            stroke="#111"
+            stroke-width="1.8"
+            stroke-dasharray="5 3.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            opacity="0"/>
+    </svg>
+  </div>
+
+  <div style="display:flex; gap:16px; align-items:flex-start;">
+
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="icon-btn" id="btnMail"
+           onmouseenter="setHover('email')" onmouseleave="clearHover()">
+        <i class="hgi hgi-stroke hgi-mail-01"></i>
+      </div>
+      <div class="icon-label" id="lblMail">mail</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="icon-btn" id="btnGlobe"
+           onmouseenter="setHover('domain')" onmouseleave="clearHover()">
+        <i class="hgi hgi-stroke hgi-internet"></i>
+      </div>
+      <div class="icon-label" id="lblGlobe">domain</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="icon-btn" id="btnUser"
+           onmouseenter="setHover('name')" onmouseleave="clearHover()">
+        <i class="hgi hgi-stroke hgi-user"></i>
+      </div>
+      <div class="icon-label" id="lblUser">handle</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const emailRow  = document.getElementById('emailRow');
+  const path      = document.getElementById('bracketPath');
+  const pName     = document.getElementById('pName');
+  const pAt       = document.getElementById('pAt');
+  const pDomain   = document.getElementById('pDomain');
+  const buttons   = {
+    email:  { btn: document.getElementById('btnMail'),  lbl: document.getElementById('lblMail') },
+    domain: { btn: document.getElementById('btnGlobe'), lbl: document.getElementById('lblGlobe') },
+    name:   { btn: document.getElementById('btnUser'),  lbl: document.getElementById('lblUser') },
+  };
+
+  /* ── Bracket geometry ─────────────────────────────────── */
+  const FOOT = 13;   // how tall the feet drop
+  const TOP  = 1;    // y for the horizontal bar
+
+  function buildPath(x, w) {
+    const x2 = x + w;
+    const r  = Math.min(5, w * 0.08);
+    // Bar is at FOOT (bottom), feet go UP toward TOP
+    return [
+      // left foot: starts at top, goes down, curves into bottom bar
+      `M ${x},${TOP}`,
+      `L ${x},${FOOT - r}`,
+      `Q ${x},${FOOT} ${x + r},${FOOT}`,
+      // bottom bar across
+      `L ${x2 - r},${FOOT}`,
+      // right corner curves up into right foot
+      `Q ${x2},${FOOT} ${x2},${FOOT - r}`,
+      `L ${x2},${TOP}`,
+    ].join(' ');
+  }
+
+  /* ── Animation state ──────────────────────────────────── */
+  let cur = { x: 0, w: 200, op: 0 };
+  let tgt = { x: 0, w: 200, op: 0 };
+  let raf = null;
+  const SPD = 0.13;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    cur.x  = lerp(cur.x,  tgt.x,  SPD);
+    cur.w  = lerp(cur.w,  tgt.w,  SPD);
+    cur.op = lerp(cur.op, tgt.op, SPD);
+
+    path.setAttribute('d', buildPath(cur.x, Math.max(cur.w, 1)));
+    path.setAttribute('opacity', cur.op.toFixed(3));
+
+    const settled =
+      Math.abs(cur.x  - tgt.x)  < 0.25 &&
+      Math.abs(cur.w  - tgt.w)  < 0.25 &&
+      Math.abs(cur.op - tgt.op) < 0.004;
+
+    raf = settled ? null : requestAnimationFrame(tick);
+  }
+
+  function animateTo(x, w, op) {
+    tgt = { x, w, op };
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  /* ── Measure elements relative to emailRow ────────────── */
+  function measure(el) {
+    const rr = emailRow.getBoundingClientRect();
+    const er = el.getBoundingClientRect();
+    return { x: er.left - rr.left, w: er.width };
+  }
+
+  /* ── Color helpers ────────────────────────────────────── */
+  function resetColors() {
+    pName.style.color   = '#888';
+    pAt.style.color     = '#bbb';
+    pDomain.style.color = '#888';
+  }
+
+  function applyColors(nameC, atC, domC) {
+    pName.style.color   = nameC;
+    pAt.style.color     = atC;
+    pDomain.style.color = domC;
+  }
+
+  /* ── Icon label active state ──────────────────────────── */
+  function activateBtn(type) {
+    Object.entries(buttons).forEach(([k, { btn, lbl }]) => {
+      const on = k === type;
+      btn.classList.toggle('active', on);
+      lbl.style.color = on ? '#111' : '#bbb';
+    });
+  }
+
+  /* ── Public hover API ─────────────────────────────────── */
+  function setHover(type) {
+    activateBtn(type);
+
+    if (type === 'email') {
+      applyColors('#111', '#111', '#111');
+      const n = measure(pName), d = measure(pDomain);
+      animateTo(n.x, d.x + d.w - n.x, 1);
+
+    } else if (type === 'domain') {
+      applyColors('#ccc', '#ddd', '#111');
+      const d = measure(pDomain);
+      animateTo(d.x, d.w, 1);
+
+    } else if (type === 'name') {
+      applyColors('#111', '#ddd', '#ccc');
+      const n = measure(pName);
+      animateTo(n.x, n.w, 1);
+    }
+  }
+
+  function clearHover() {
+    activateBtn(null);
+    resetColors();
+    tgt.op = 0;
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  /* ── Seed bracket at full-width, invisible ────────────── */
+  window.addEventListener('load', () => {
+    const n = measure(pName), d = measure(pDomain);
+    cur.x  = n.x;
+    cur.w  = d.x + d.w - n.x;
+    cur.op = 0;
+    path.setAttribute('d', buildPath(cur.x, cur.w));
+  });
+</script>
+</body>
+</html>
