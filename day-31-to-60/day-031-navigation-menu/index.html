@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    
+    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+
+    <style>
+        /* spring physics */
+        .spring {
+            transition: all 0.45s cubic-bezier(0.34, 2.5, 0.64, 1);
+        }
+    </style>
+    <title>Hover Icons</title>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <!-- Floating Nav -->
+    <div class="bg-white backdrop-blur-xl shadow rounded-xl px-4 py-3 grid grid-cols-5  gap-3 items-center">
+
+        <!-- Item -->
+        <div class="group">
+            <div class="spring px-1 py-1.5 rounded-xl bg-gray-100 
+                  group-hover:bg-gray-50 
+                  group-hover:-translate-y-2
+                  group-hover:shadow-md
+                  cursor-pointer flex items-center justify-center">
+
+                <!-- Search (Hugeicon style) -->
+                 <i class="text-[25px]  hgi hgi-stroke hgi-search-01"></i>
+            </div>
+        </div>
+
+        <!-- Item -->
+        <div class="group">
+            <div class="spring px-1 py-1.5 rounded-xl bg-gray-100 
+                  group-hover:bg-gray-50 
+                  group-hover:-translate-y-2 
+                  
+                  group-hover:shadow-md
+                  cursor-pointer flex items-center justify-center ">
+
+                <i class="text-[25px] hgi hgi-stroke hgi-cards-01"></i>
+            </div>
+        </div>
+
+        <!-- Item -->
+        <div class="group">
+            <div class="spring px-3 py-1.5 rounded-xl bg-gray-100  
+                  group-hover:bg-gray-50 
+                  group-hover:-translate-y-2 
+                  
+                  group-hover:shadow-md
+                  cursor-pointer flex items-center justify-center">
+
+                <!-- Add -->
+                <i class="text-[25px] hgi hgi-stroke hgi-plus-sign-square"></i>
+            </div>
+        </div>
+
+        <!-- Item -->
+        <div class="group">
+            <div class="spring px-3 py-1.5 rounded-xl bg-gray-100 
+                  group-hover:bg-gray-50 
+                  group-hover:-translate-y-2 
+                  
+                  group-hover:shadow-md
+                  cursor-pointer flex items-center justify-center">
+
+                <!-- Chat -->
+                 <i class="text-[25px] hgi hgi-stroke hgi-bubble-chat"></i>
+            </div>
+        </div>
+
+        <!-- Item -->
+        <div class="group">
+            <div class="spring px-3 py-1.5 rounded-xl bg-gray-100  
+                  group-hover:bg-gray-50 
+                  group-hover:-translate-y-2 
+                  
+                  group-hover:shadow-md
+                  cursor-pointer flex items-center justify-center">
+
+                <!-- Settings -->
+                <i class="text-[25px]  hgi hgi-stroke hgi-settings-01"></i>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
