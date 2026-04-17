@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FeatherDev Footer</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hugeicons/font/css/hugeicons.min.css" />
+  <style>
+    .nav-link {
+      position: relative;
+      display: inline-block;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1.5px;
+      background: #f97316;
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .social-btn:hover { transform: translateY(-3px); }
+    .social-btn { transition: transform 0.2s ease, background 0.2s ease; }
+  </style>
+</head>
+<body class="bg-brand-950 flex items-center justify-center min-h-screen bg-black">
+
+  <footer class="bg-black text-white py-8 px-8">
+  <div class=" mx-auto rounded-[32px] overflow-hidden bg-gradient-to-br from-pink-500 via-fuchsia-600 to-rose-500 shadow-2xl">
+    
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-10 py-14">
+      
+      <!-- Brand -->
+      <div class="space-y-6">
+        <h2 class="text-3xl font-bold tracking-tight">Dynamite</h2>
+        <p class="text-pink-100 leading-relaxed text-lg max-w-sm">
+          Dynamite is a React component library that provides a set of 
+          pre-built UI components for building modern web applications. 
+          Trusted by over 10,000 companies worldwide.
+        </p>
+
+        <div class="flex gap-4 pt-2">
+          <a href="#" class="w-11 h-11 rounded-full bg-white text-pink-600 flex items-center justify-center hover:scale-110 transition">
+            ●
+          </a>
+          <a href="#" class="w-11 h-11 rounded-full bg-white text-pink-600 flex items-center justify-center hover:scale-110 transition">
+            ●
+          </a>
+          <a href="#" class="w-11 h-11 rounded-full bg-white text-pink-600 flex items-center justify-center hover:scale-110 transition">
+            ●
+          </a>
+          <a href="#" class="w-11 h-11 rounded-full bg-white text-pink-600 flex items-center justify-center hover:scale-110 transition">
+            ●
+          </a>
+        </div>
+      </div>
+
+      <!-- Product -->
+      <div>
+        <h3 class="text-2xl font-semibold mb-6">Product</h3>
+        <ul class="space-y-4 text-pink-100 text-lg">
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Updates</a></li>
+          <li><a href="#">Roadmap</a></li>
+          <li><a href="#">Enterprise</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="text-2xl font-semibold mb-6">Company</h3>
+        <ul class="space-y-4 text-pink-100 text-lg">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Press Kit</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h3 class="text-2xl font-semibold mb-6">Resources</h3>
+        <ul class="space-y-4 text-pink-100 text-lg">
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API Reference</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="text-center text-gray-500 text-lg mt-10">
+    © 2025 FeatherDev. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
