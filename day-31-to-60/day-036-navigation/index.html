@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bottom Nav</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Geist Mono", monospace;
+            background: #e8e8ed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover i,
+        .nav-item:hover span {
+            color: #1a1a1a;
+        }
+
+        .nav-item.active i {
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .nav-item.active span {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .nav-item i {
+            font-size: 26px;
+            transition: color 0.2s ease, transform 0.15s ease;
+        }
+
+        .nav-item:hover i {
+            transform: translateY(-1px);
+        }
+
+        .nav-item.active i {
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="bg-white rounded-3xl shadow-sm px-6 py-4 flex items-center justify-around gap-2" style="width: 380px;">
+
+        <!-- Home -->
+        <button class="nav-item flex flex-col items-center gap-1 px-4 py-1">
+            <i class="hgi hgi-stroke hgi-home-01 text-gray-400"></i>
+            <span class="text-xs text-gray-400">Home</span>
+        </button>
+
+        <!-- Cart -->
+        <button class="nav-item flex flex-col items-center gap-1 px-4 py-1">
+            <i class="hgi hgi-stroke hgi-shopping-bag-01 text-gray-400"></i>
+            <span class="text-xs text-gray-400">Cart</span>
+        </button>
+
+        <!-- Orders -->
+        <button class="nav-item flex flex-col items-center gap-1 px-4 py-1">
+            <i class="hgi hgi-stroke hgi-rounded hgi-check-list text-gray-400"></i>
+            <span class="text-xs text-gray-400">Orders</span>
+        </button>
+
+        <!-- Profile (active) -->
+        <button class="nav-item flex flex-col items-center gap-1 px-4 py-1">
+            <i class="hgi hgi-stroke hgi-user text-gray-400"></i>
+            <span class="text-xs text-gray-400  ">Profile</span>
+        </button>
+
+    </nav>
+
+    <script>
+        const items = document.querySelectorAll('.nav-item');
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                items.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
