@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Huge Icons -->
+  <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+
+  <!-- Geist Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Geist Mono', monospace;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="w-[420px] bg-white rounded-2xl shadowborder border-gray-200 p-5">
+
+    <!-- Header -->
+    <div class="flex items-start justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+          <i class="hgi hgi-stroke hgi-rounded hgi-cloud-upload"></i>
+        </div>
+        <div>
+          <h2 class="text-sm font-semibold text-gray-800">Upload files</h2>
+          <p class="text-xs text-gray-500">Select and upload the files of your choice</p>
+        </div>
+      </div>
+      <button class="text-gray-400 hover:text-gray-600 cursor-pointer">
+        <i class="hgi hgi-stroke hgi-cancel-01 text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Drop Area -->
+    <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center mb-4">
+      <div class="flex flex-col items-center gap-2">
+        <i class="hgi hgi-stroke hgi-cloud-upload text-2xl text-gray-400"></i>
+        <p class="text-sm text-gray-700 font-medium">
+          Choose a file or drag & drop it here.
+        </p>
+        <p class="text-xs text-gray-500">
+          JPEG, PNG, PDF, and MP4 formats, up to 50 MB.
+        </p>
+
+        <button class="mt-3 px-4 py-2 text-sm border border-gray-300 rounded-lg bg-white hover:bg-gray-50">
+          Browse File
+        </button>
+      </div>
+    </div>
+
+    <!-- Uploading File -->
+    <div class="flex items-center justify-between border border-gray-300 rounded-lg p-3 mb-3">
+      <div class="flex items-center gap-3 w-full">
+        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center text-red-600 font-semibold text-xs">
+          PDF
+        </div>
+
+        <div class="flex-1">
+          <p class="text-sm font-medium text-gray-800">my-cv.pdf</p>
+          <p class="text-xs text-gray-500">20 KB of 120 KB • Uploading...</p>
+
+          <!-- Progress -->
+          <div class="w-full h-1.5 bg-gray-200 rounded-full mt-2">
+            <div class="w-1/4 h-full bg-blue-500 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="text-gray-400 hover:text-gray-600 ml-2 cursor-pointer">
+        <i class="hgi hgi-stroke hgi-cancel-01"></i>
+      </button>
+    </div>
+
+    <!-- Completed File -->
+    <div class="flex items-center justify-between border border-gray-300 rounded-lg p-3 mb-4">
+      <div class="flex items-center gap-3 w-full">
+        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center text-red-600 font-semibold text-xs">
+          PDF
+        </div>
+
+        <div class="flex-1">
+          <p class="text-sm font-medium text-gray-800">google-certificate.pdf</p>
+          <p class="text-xs text-gray-500 flex items-center gap-1">
+            94 KB of 94 KB
+            <i class="hgi hgi-stroke hgi-check-circle text-green-500"></i>
+            Completed
+          </p>
+        </div>
+      </div>
+
+      <button class="text-gray-400 hover:text-red-500 ml-2 cursor-pointer">
+        <i class="hgi hgi-stroke hgi-delete-02"></i>
+      </button>
+    </div>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-3 text-gray-400 text-xs my-6">
+      <div class="flex-1 h-px bg-gray-200"></div>
+      OR
+      <div class="flex-1 h-px bg-gray-200"></div>
+    </div>
+
+    <!-- URL Input -->
+    <div>
+      <label class="text-xs text-gray-500 mb-1 block">
+        Import from URL Link
+      </label>
+      <div class="flex items-center border border-gray-300 rounded-lg px-3 py-2 gap-2">
+        <i class="hgi hgi-stroke hgi-link-01 text-gray-400"></i>
+        <input 
+          type="text"
+          placeholder="Paste file URL"
+          class="w-full outline-none text-sm"
+        />
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
