@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Schedule UI</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -10,19 +11,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
   </style>
 </head>
 
 <body class="bg-gray-200 min-h-screen flex items-center justify-center">
 
-  <div class="bg-gray-50 w-[920px] rounded-2xl shadow-sm p-6 border border-gray-200">
+  <div class="bg-gray-50 w-[920px] rounded-2xl shadow-sm border border-gray-200">
 
     <!-- Header -->
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 px-6 py-6">
       <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       </div>
       <div>
@@ -31,10 +36,10 @@
       </div>
     </div>
 
-    <div class="border-t mt-4 pt-4 grid grid-cols-2 gap-6">
+    <div class="border-t border-gray-300 grid grid-cols-2 gap-6 ">
 
       <!-- LEFT: CALENDAR -->
-      <div class="pr-6 border-r">
+      <div class="p-6 border-r-1  border-gray-300 ">
 
         <!-- Month -->
         <div class="flex items-center justify-between mb-4">
@@ -50,7 +55,7 @@
         </div>
 
         <!-- Dates -->
-        <div class="grid grid-cols-7 gap-y-2 text-sm text-gray-700">
+        <div class="grid grid-cols-7  text-sm text-gray-700">
 
           <span class="text-gray-300">30</span>
           <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
@@ -78,27 +83,23 @@
       </div>
 
       <!-- RIGHT PANEL -->
-      <div class="space-y-5">
+      <div class="space-y-5 px-6 py-4">
 
         <!-- Start -->
         <div>
           <label class="text-sm text-gray-600 font-medium">Start date*</label>
-          <div class="flex mt-2 border rounded-lg bg-white overflow-hidden">
-            <input type="text" value="July 14, 2025"
-              class="flex-1 px-3 py-2 text-sm outline-none bg-transparent"/>
-            <input type="text" value="9:00 am"
-              class="w-28 px-3 py-2 text-sm border-l outline-none bg-transparent"/>
+          <div class="flex mt-2 border border-gray-300 rounded-lg bg-white overflow-hidden">
+            <input type="text" value="July 14, 2025" class="flex-1 px-3 py-2 text-sm outline-none bg-transparent" />
+            <input type="text" value="9:00 am" class="w-28 px-3 py-2 text-sm border-l border-gray-300 outline-none bg-transparent" />
           </div>
         </div>
 
         <!-- End -->
         <div>
           <label class="text-sm text-gray-600 font-medium">End date*</label>
-          <div class="flex mt-2 border rounded-lg bg-white overflow-hidden">
-            <input type="text" value="July 20, 2025"
-              class="flex-1 px-3 py-2 text-sm outline-none bg-transparent"/>
-            <input type="text" value="10:00 am"
-              class="w-28 px-3 py-2 text-sm border-l outline-none bg-transparent"/>
+          <div class="flex mt-2 border border-gray-300   rounded-lg bg-white overflow-hidden">
+            <input type="text" value="July 20, 2025" class="flex-1 px-3 py-2 text-sm outline-none bg-transparent" />
+            <input type="text" value="10:00 am" class="w-28 px-3 py-2 text-sm border-l border-gray-300 outline-none bg-transparent" />
           </div>
         </div>
 
@@ -115,14 +116,14 @@
     </div>
 
     <!-- Footer -->
-    <div class="border-t mt-6 pt-4 flex items-center justify-between">
+    <div class="border-t border-gray-300 mt-6 p-6 flex items-center justify-between">
 
       <p class="text-sm text-gray-500">
         Event: <span class="text-gray-700">July 14 - 20, from 9:00 am - 10:00 am</span>
       </p>
 
       <div class="flex gap-3">
-        <button class="px-4 py-2 text-sm border rounded-lg bg-white hover:bg-gray-100">
+        <button class="px-4 py-2 text-sm border border-gray-400 text-gray-600 rounded-lg bg-white hover:bg-gray-100">
           Cancel
         </button>
 
@@ -136,4 +137,5 @@
   </div>
 
 </body>
+
 </html>
