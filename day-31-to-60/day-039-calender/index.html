@@ -9,10 +9,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Huge Icons -->
+  <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
 
   <style>
     body {
       font-family: 'Inter', sans-serif;
+    }
+
+    button,
+    input {
+      cursor: pointer;
     }
   </style>
 </head>
@@ -23,8 +30,8 @@
 
     <!-- Header -->
     <div class="flex items-center gap-4 px-6 py-6">
-      <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" fill="none" viewBox="0 0 24 24"
+      <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border border-gray-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 " fill="none" viewBox="0 0 24 24"
           stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -39,58 +46,62 @@
     <div class="border-t border-gray-300 grid grid-cols-2 gap-6 ">
 
       <!-- LEFT: CALENDAR -->
-      <div class="p-6 border-r-1  border-gray-300 ">
+      <div class="px-6 py-8 border-r  border-gray-300  ">
 
         <!-- Month -->
-        <div class="flex items-center justify-between mb-4">
-          <button class="text-gray-400">&lt;</button>
-          <h3 class="text-sm font-medium text-gray-700">July 2025</h3>
-          <button class="text-gray-400">&gt;</button>
+        <div class="flex items-center justify-between mb-4 px-3">
+          <button class="text-gray-400 cursor-pointer">
+            <i class="hgi hgi-stroke hgi-rounded hgi-arrow-left-01"></i>
+          </button>
+          <h3 class="text-sm font-medium text-gray-700">July 2026</h3>
+          <button class="text-gray-400 cursor-pointer">
+            <i class="hgi hgi-stroke hgi-rounded hgi-arrow-right-01"></i>
+          </button>
         </div>
 
         <!-- Weekdays -->
-        <div class="grid grid-cols-7 text-xs text-gray-400 mb-2">
+        <div class="text-center grid grid-cols-7 text-xs text-gray-400 mb-4">
           <span>Mon</span><span>Tue</span><span>Wed</span>
           <span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
         </div>
 
         <!-- Dates -->
-        <div class="grid grid-cols-7  text-sm text-gray-700">
+        <div class="grid grid-cols-7 grid-rows-[40px_40px_40px_40px_40px_40px] text-sm text-gray-700 text-center ">
 
-          <span class="text-gray-300">30</span>
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+          <span class="text-gray-300 flex items-center justify-center">30</span>
+          <span class="flex items-center justify-center">1</span><span class="flex items-center justify-center">2</span><span class="flex items-center justify-center">3</span><span class="flex items-center justify-center">4</span><span class="flex items-center justify-center">5</span><span class="flex items-center justify-center">6</span>
 
-          <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span>
+          <span class="flex items-center justify-center">7</span><span class="flex items-center justify-center">8</span><span class="flex items-center justify-center">9</span><span class="flex items-center justify-center">10</span><span class="flex items-center justify-center">11</span><span class="flex items-center justify-center">12</span><span class="flex items-center justify-center">13</span>
 
           <!-- RANGE -->
-          <span class="w-8 h-8 flex items-center justify-center bg-indigo-600 text-white rounded-full">14</span>
+          <span class="flex items-center justify-center bg-indigo-600 text-white rounded-l-xl">14</span>
 
-          <span class="w-8 h-8 flex items-center justify-center bg-indigo-100 text-indigo-700">15</span>
-          <span class="w-8 h-8 flex items-center justify-center bg-indigo-100 text-indigo-700">16</span>
-          <span class="w-8 h-8 flex items-center justify-center bg-indigo-100 text-indigo-700">17</span>
-          <span class="w-8 h-8 flex items-center justify-center bg-indigo-100 text-indigo-700">18</span>
-          <span class="w-8 h-8 flex items-center justify-center bg-indigo-100 text-indigo-700">19</span>
+          <span class="flex items-center justify-center bg-indigo-100">15</span>
+          <span class="flex items-center justify-center bg-indigo-100">16</span>
+          <span class="flex items-center justify-center bg-indigo-100">17</span>
+          <span class="flex items-center justify-center bg-indigo-100">18</span>
+          <span class="flex items-center justify-center bg-indigo-100">19</span>
+          <span class="flex items-center justify-center bg-indigo-600 text-white rounded-r-xl">20</span>
 
-          <span class="w-8 h-8 flex items-center justify-center bg-indigo-600 text-white rounded-full">20</span>
+          <span class="flex items-center justify-center">21</span><span class="flex items-center justify-center">22</span><span class="flex items-center justify-center">23</span><span class="flex items-center justify-center">24</span><span class="flex items-center justify-center">25</span><span class="flex items-center justify-center">26</span><span class="flex items-center justify-center">27</span>
 
-          <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span>
-
-          <span>28</span><span>29</span><span>30</span><span>31</span>
-          <span class="text-gray-300">1</span>
-          <span class="text-gray-300">2</span>
-          <span class="text-gray-300">3</span>
+          <span class="flex items-center justify-center">28</span><span class="flex items-center justify-center">29</span><span class="flex items-center justify-center">30</span><span class="flex items-center justify-center">31</span>
+          <span class="text-gray-300 flex items-center justify-center">1</span>
+          <span class="text-gray-300 flex items-center justify-center">2</span>
+          <span class="text-gray-300 flex items-center justify-center">3</span>
         </div>
       </div>
 
       <!-- RIGHT PANEL -->
-      <div class="space-y-5 px-6 py-4">
+      <div class="space-y-5 px-6 py-8">
 
         <!-- Start -->
         <div>
           <label class="text-sm text-gray-600 font-medium">Start date*</label>
           <div class="flex mt-2 border border-gray-300 rounded-lg bg-white overflow-hidden">
-            <input type="text" value="July 14, 2025" class="flex-1 px-3 py-2 text-sm outline-none bg-transparent" />
-            <input type="text" value="9:00 am" class="w-28 px-3 py-2 text-sm border-l border-gray-300 outline-none bg-transparent" />
+            <input type="text" value="July 14, 2026" class="flex-1 px-3 py-2 text-sm outline-none bg-transparent" />
+            <input type="text" value="9:00 am"
+              class="w-28 px-3 py-2 text-sm border-l border-gray-300 outline-none bg-transparent" />
           </div>
         </div>
 
@@ -98,8 +109,9 @@
         <div>
           <label class="text-sm text-gray-600 font-medium">End date*</label>
           <div class="flex mt-2 border border-gray-300   rounded-lg bg-white overflow-hidden">
-            <input type="text" value="July 20, 2025" class="flex-1 px-3 py-2 text-sm outline-none bg-transparent" />
-            <input type="text" value="10:00 am" class="w-28 px-3 py-2 text-sm border-l border-gray-300 outline-none bg-transparent" />
+            <input type="text" value="July 20, 2026" class="flex-1 px-3 py-2 text-sm outline-none bg-transparent" />
+            <input type="text" value="10:00 am"
+              class="w-28 px-3 py-2 text-sm border-l border-gray-300 outline-none bg-transparent" />
           </div>
         </div>
 
@@ -116,7 +128,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="border-t border-gray-300 mt-6 p-6 flex items-center justify-between">
+    <div class="border-t border-gray-300 p-6 flex items-center justify-between">
 
       <p class="text-sm text-gray-500">
         Event: <span class="text-gray-700">July 14 - 20, from 9:00 am - 10:00 am</span>
