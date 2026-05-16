@@ -48,7 +48,7 @@ export function HoldToDelete({ onDelete, children }: HoldToDeleteProps) {
     return (
         <motion.button
             ref={buttonRef}
-            className="relative overflow-hidden rounded-2xl bg-gray-100 px-6 py-2.5 cursor-pointer"
+            className="relative overflow-hidden rounded-2xl bg-gray-100 px-6 py-2.5 cursor-pointer min-w-[200px]"
             onMouseDown={startDeleting}
             onMouseUp={stopDeleting}
             onMouseLeave={stopDeleting}
@@ -108,7 +108,7 @@ export function HoldToDelete({ onDelete, children }: HoldToDeleteProps) {
                             maxWidth: isComplete ? 0 : 200,
                             opacity: isComplete ? 0 : 1,
                         }}
-                        transition={{ duration: 0.3,delay:0.25 }}
+                        transition={{ duration: 0.3 }}
                     >
                         <span className="text-red-500">{children}</span>
                     </motion.div>
