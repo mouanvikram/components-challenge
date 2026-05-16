@@ -6,8 +6,7 @@ export default function HomePage() {
     <main className="flex min-h-screen items-center justify-center">
 
     <HoldToDelete onDelete={() => console.log("onDelete")}>
-      <Trash2
-      className="w-4 h-4" />
+
       Hold to delete
     </HoldToDelete>
     </main>
