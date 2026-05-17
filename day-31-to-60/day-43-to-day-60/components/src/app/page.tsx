@@ -5,11 +5,6 @@ import { Trash2 } from "lucide-react"
 export default function HomePage() {
   return (
     <main className="flex min-h-screen items-center justify-center">
-
-      {/* <HoldToDelete onDelete={() => console.log("onDelete")}>
-
-      Hold to delete
-    </HoldToDelete> */}
       <Button onClick={() => console.log("button clicked")} >
         Accept
       </Button>
