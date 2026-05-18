@@ -1,13 +1,14 @@
 'use client'
 import { Button } from "@/components/ui/button_with_shadows"
-import { HoldToDelete } from "@/components/ui/hold_to_delete"
-import { Trash2 } from "lucide-react"
+import { ToastStack } from "@/components/ui/toast"
+
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-6">
       <Button onClick={() => console.log("button clicked")} >
         Accept
       </Button>
+      <ToastStack />
     </main >
   )
 }
