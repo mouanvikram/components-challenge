@@ -39,7 +39,10 @@ function ToastViewport({ toasts }: { toasts: ToastItem[] }) {
                 "rounded-xl border border-gray-200 bg-white shadow-lg",
                 "px-4 py-3 pointer-events-auto"
               )}
-              style={{ zIndex: toasts.length - index }}
+              style={{
+                zIndex: toasts.length - index,
+                filter: `blur(${index * 0.4}px)`
+              }}
               initial={{ x: 80, opacity: 0, y: 0, scale: 1 }}
               animate={{
                 x: 0,
@@ -47,7 +50,7 @@ function ToastViewport({ toasts }: { toasts: ToastItem[] }) {
                 y: -index * PEEK_OFFSET,
                 scale: 1 - index * 0.04,
               }}
-              exit={{ x: 40, opacity: 0, transition: { duration: 0.2 } }}
+              exit={{ x: 40, opacity: 0, transition: { duration: 0.2 ,},zIndex: -10 }}
               transition={{
                 type: "spring",
                 stiffness: 400,
