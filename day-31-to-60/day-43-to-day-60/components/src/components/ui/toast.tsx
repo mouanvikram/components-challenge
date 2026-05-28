@@ -46,7 +46,7 @@ function ToastViewport({ toasts }: { toasts: ToastItem[] }) {
               initial={{ x: 80, opacity: 0, y: 0, scale: 1 }}
               animate={{
                 x: 0,
-                opacity: 1,
+                opacity: index < MAX_VISIBLE ? toasts.length - index* 0.55 : 0,
                 y: -index * PEEK_OFFSET,
                 scale: 1 - index * 0.04,
               }}
