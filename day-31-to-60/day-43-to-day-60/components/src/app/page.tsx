@@ -5,6 +5,7 @@ import { ShreddingMachine } from "@/components/ui/shredding_machine"
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-50">
+    
       <ShreddingMachine />
     </main >
   )
