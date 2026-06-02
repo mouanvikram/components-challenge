@@ -1,13 +1,10 @@
-'use client'
-import { Button } from "@/components/ui/button_with_shadows"
-import { ToastStack } from "@/components/ui/toast"
-import { ShreddingMachine } from "@/components/ui/shredding_machine"
-import { ShinyText } from "@/components/ui/shiny_text_effect"
+"use client";
+
+import { BlurLandingText } from "@/components/ui/blur_landing";
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-50">
-    
-      <ShinyText />
-    </main >
-  )
+      <BlurLandingText />
+    </main>
+  );
 }
