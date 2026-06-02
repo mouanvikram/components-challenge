@@ -6,20 +6,20 @@ export function ShinyText() {
     <motion.h1
       className="
         inline-block
-        bg-[linear-gradient(110deg,#777,35%,#e4e4e4,65%,#777)]
-        bg-size-[250%_140%]
+        bg-[linear-gradient(110deg,#777,25%,#e4e4e4,75%,#777)]
+        bg-size-[200%_100%]
         bg-clip-text
         text-transparent
         text-5xl
         font-bold
       "
       animate={{
-        backgroundPosition: ["240% 0", "-240% 0"],
+        backgroundPosition: ["200% 0", "-200% 0"],
       }}
       transition={{
         repeat: Infinity,
         duration: 8,
-        ease:"easeOut",
+        ease:"linear",
       }}
     >
       Shiny Text
