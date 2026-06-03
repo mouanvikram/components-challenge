@@ -17,7 +17,7 @@ export default function FolderAnimation() {
         }}
       >
         {/* Back Folder */}
-        <div className="absolute inset-0 z-[1]">
+        <div className="absolute inset-0 z-1">
           <svg
             viewBox="0 0 297 237"
             className="h-full w-full"
@@ -31,7 +31,7 @@ export default function FolderAnimation() {
         </div>
 
         {/* Cards */}
-        <div className="absolute inset-0 z-[2] flex items-end justify-center">
+        <div className="absolute inset-0 z-2 flex items-end justify-center">
           <div className="relative h-[210px] w-[180px]">
             {/* Card 3 */}
             <motion.div
@@ -140,15 +140,15 @@ export default function FolderAnimation() {
                 }
           }
           transition={{
-            type: "spring",
-            stiffness: 200,
-            damping: 20,
+            ease:'easeInOut',
+            duration: 0.5
+            
           }}
           style={{
             transformOrigin: "bottom center",
             transformPerspective: 600,
           }}
-          className="absolute bottom-0 left-0 z-[3] w-full"
+          className="absolute bottom-0 left-0 z-3 w-full backdrop-blur-md clip-folder-front"
         >
           <svg viewBox="0 0 298 181" className="w-full">
             <path
