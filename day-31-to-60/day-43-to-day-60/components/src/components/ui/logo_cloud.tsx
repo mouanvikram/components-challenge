@@ -184,7 +184,7 @@ function LogoRow({ keyPrefix }: { keyPrefix: string }) {
 
 export function LogoCloud() {
   return (
-    <section className="w-full max-w-3xl rounded-2xl border border-neutral-200/80 bg-neutral-50 px-8 py-12 shadow-sm">
+    <section className="w-full max-w-5xl rounded-2xl border border-neutral-200/80 bg-neutral-50 px-8 py-12 shadow-sm">
       <div className="text-center">
         <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
           Trusted by people who build future
