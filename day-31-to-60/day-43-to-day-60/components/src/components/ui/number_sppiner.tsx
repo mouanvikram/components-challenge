@@ -66,6 +66,7 @@ export default function NumberSpinner() {
 
       <div className="flex gap-4">
         <input
+          placeholder="Enter a number"
           type="number"
           value={input}
           onChange={(e) => setInput(e.target.value)}
