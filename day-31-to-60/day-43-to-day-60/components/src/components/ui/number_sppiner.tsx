@@ -50,7 +50,6 @@ export default function NumberSpinner() {
 
   const digits = value
     .toString()
-    .padStart(6, "0")
     .split("")
     .map(Number);
 
