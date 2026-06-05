@@ -128,10 +128,6 @@ function Scales() {
     <div
       className="absolute inset-0 mt-2  bg-[repeating-linear-gradient(135deg,transparent_0_6px,rgb(229_231_235)_6px_8px)]
             mask-[radial-gradient(ellipse_at_center,black_1%,transparent_100%)]
-            flex 
-            items-center
-            justify-center
-            z-1
             "
     ></div>
   );
@@ -222,7 +218,7 @@ export function TimelineCard() {
   return (
     <div
       className="
-        relative w-[340px] h-[300px]
+        relative w-full h-[300px]
         bg-[repeating-linear-gradient(
           -45deg,
           transparent_0px,
@@ -358,6 +354,7 @@ export default function BentoGrid() {
           title="Collaborative Analysis"
           desc="Add comments, share insights, and work together with your team to extract maximum."
         >
+            <Scales/>
           <div className="absolute inset-0 flex items-center justify-center z-10">
             <CardStack />
           </div>
