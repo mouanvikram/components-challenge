@@ -8,33 +8,8 @@ import {
   AtSign,
   Smile,
   Paperclip,
-  Bitcoin,
-  DollarSign,
-  Euro,
 } from "lucide-react";
 
-// const cardsData = {
-//   card1: {
-//     title: "Scheduled Reports",
-//     desc: "Automate report delivery to stakeholders with customizable scheduling options.",
-//   },
-//   card2: {
-//     title: "Collaborative Analysis",
-//     desc: "Add comments, share insights, and work together with your team to extract maximum.",
-//   },
-//   card3: {
-//     title: "Collaborative Analysis",
-//     desc: "Add comments, share insights, and work together with your team to extract maximum.",
-//   },
-//   card4: {
-//     title: "Collaborative Analysis",
-//     desc: "Add comments, share insights, and work together with your team to extract maximum.",
-//   },
-//   card5: {
-//     title: "Collaborative Analysis",
-//     desc: "Add comments, share insights, and work together with your team to extract maximum.",
-//   },
-// };
 function Card({
   className,
   title,
