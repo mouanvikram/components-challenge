@@ -17,9 +17,6 @@ export function PDFIcon({ className }: PDFIconProps) {
       role="img"
     >
       <div className="relative h-24 w-18.5 rounded-[5px] border border-[#dcdfe3] bg-white shadow-[0_14px_20px_rgba(17,24,39,0.12),0_2px_5px_rgba(17,24,39,0.08)]">
-        <div className="absolute -right-px -top-px h-4 w-4 overflow-hidden rounded-tr-[5px]">
-          <div className="h-5.75 w-5.75 origin-top-left rotate-45 border-b border-[#dcdfe3] bg-[#f7f8fa]" />
-        </div>
 
         <div className="absolute left-3.75 top-3.75 flex w-11 flex-col gap-1.75">
           <div className="h-[3px] w-full rounded-full bg-[#eceef1]" />
