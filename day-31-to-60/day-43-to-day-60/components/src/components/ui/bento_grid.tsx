@@ -109,7 +109,7 @@ function Scales() {
 }
 export function CardStack() {
   return (
-    <div className="relative h-[340px] w-full overflow-hidden">
+    <div className="relative h-85 w-full overflow-hidden">
       {/* Fade the entire stack */}
       <div
         className="
@@ -117,18 +117,18 @@ export function CardStack() {
         "
       >
         {/* Card 4 */}
-        <div className="absolute inset-x-6 top-8 h-[260px] rounded-[28px] border border-neutral-200 bg-white" />
+        <div className="absolute inset-x-6 top-8 h-65 rounded-[28px] border border-neutral-200 bg-white" />
 
         {/* Card 3 */}
-        <div className="absolute inset-x-4 top-10 h-[260px] rounded-[28px] border border-neutral-200 bg-white" />
+        <div className="absolute inset-x-4 top-10 h-65 rounded-[28px] border border-neutral-200 bg-white" />
 
         {/* Card 2 */}
-        <div className="absolute inset-x-2 top-12 h-[260px] rounded-[28px] border border-neutral-200 bg-white" />
+        <div className="absolute inset-x-2 top-12 h-65 rounded-[28px] border border-neutral-200 bg-white" />
 
         {/* Main Card */}
         <div
           className="absolute inset-x-0 top-14 rounded-3xl border border-neutral-200 bg-white p-8 shadow-sm 
-          [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
+          mask-[linear-gradient(to_bottom,black_75%,transparent_100%)]"
         >
           <div className="inline-block bg-amber-100 px-1">
             <h3 className=" font-semibold text-amber-900">Spending Limit</h3>
@@ -193,7 +193,7 @@ export function TimelineCard() {
   return (
     <div
       className="
-        relative w-full h-[300px]
+        relative w-full h-75
         bg-[repeating-linear-gradient(
           -45deg,
           transparent_0px,
