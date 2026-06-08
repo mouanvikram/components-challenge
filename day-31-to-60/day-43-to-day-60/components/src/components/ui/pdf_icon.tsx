@@ -16,7 +16,7 @@ export function PDFIcon({ className }: PDFIconProps) {
       aria-label="PDF file"
       role="img"
     >
-      <div className="relative h-24 w-18.5 rounded-[5px] border border-[#dcdfe3] bg-white shadow-[0_14px_20px_rgba(17,24,39,0.12),0_2px_5px_rgba(17,24,39,0.08)]">
+      <div className="relative h-24 w-18.5 rounded-[5px] border border-[#dcdfe3] bg-white shadow-[0_14px_20px_rgba(17,24,39,0.03),0_2px_5px_rgba(17,24,39,0.08)]">
 
         <div className="absolute left-3.75 top-3.75 flex w-11 flex-col gap-1.75">
           <div className="h-[3px] w-full rounded-full bg-[#eceef1]" />

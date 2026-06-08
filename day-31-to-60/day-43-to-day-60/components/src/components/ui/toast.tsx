@@ -46,7 +46,7 @@ function ToastViewport({ toasts }: { toasts: ToastItem[] }) {
               initial={{ x: 80, opacity: 0, y: 0, scale: 1 }}
               animate={{
                 x: 0,
-                opacity: index < MAX_VISIBLE ? toasts.length - index* 0.55 : 0,
+                opacity: 1,
                 y: -index * PEEK_OFFSET,
                 scale: 1 - index * 0.04,
               }}
@@ -112,7 +112,7 @@ export function ToastStack() {
       <button
         type="button"
         onClick={addToast}
-        className="rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition-colors hover:bg-gray-50 cursor-pointer "
+        className="rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition-colors hover:bg-gray-50"
       >
         Show toast
       </button>
