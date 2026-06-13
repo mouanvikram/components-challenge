@@ -72,9 +72,9 @@ export function ProjectBudgetCard({
         {details.map((detail) => (
           <div
             key={detail.key}
-            className="px-6 py-5 sm:px-9 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-neutral-200 sm:[&:not(:last-child)]:border-b-0"
+            className="px-6 py-5 sm:px-9 not-last:border-b not-last:border-neutral-200 sm:not-last:border-b-0"
           >
-            <dt className="text-[10px] font-semibold uppercase tracking-[0.1em] text-neutral-400">
+            <dt className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
               {detail.label}
             </dt>
             <dd className="mt-1 text-xs font-semibold text-neutral-800">
